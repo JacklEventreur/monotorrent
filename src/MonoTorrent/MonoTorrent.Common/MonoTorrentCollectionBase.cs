@@ -1,6 +1,4 @@
 using System;
-using System.Text;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace MonoTorrent.Common
@@ -8,19 +6,16 @@ namespace MonoTorrent.Common
     public class MonoTorrentCollection<T> : List<T>, ICloneable
     {
         public MonoTorrentCollection()
-            : base()
         {
 
         }
 
-        public MonoTorrentCollection(IEnumerable<T> collection)
-            : base(collection)
+        public MonoTorrentCollection(IEnumerable<T> collection) : base(collection)
         {
 
         }
 
-        public MonoTorrentCollection(int capacity)
-            : base(capacity)
+        public MonoTorrentCollection(int capacity) : base(capacity)
         {
 
         }

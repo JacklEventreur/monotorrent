@@ -164,7 +164,7 @@ namespace MonoTorrent.Common {
 
             shaHasher = HashAlgoFactory.Create<SHA1> ();
             torrentHashes = new List<byte> ();
-            overallTotal = Toolbox.Accumulate<TorrentFile> (files, delegate (TorrentFile m) { return m.Length; });
+            overallTotal = Toolbox.Accumulate (files, delegate (TorrentFile m) { return m.Length; });
 
             long pieceLength = PieceLength;
             buffer = new byte [pieceLength];
@@ -277,7 +277,7 @@ namespace MonoTorrent.Common {
         void CreateMultiFileTorrent (BEncodedDictionary dictionary, List<TorrentFile> mappings, PieceWriter writer, string name)
         {
             BEncodedDictionary info = (BEncodedDictionary) dictionary ["info"];
-            List<BEncodedValue> files = mappings.ConvertAll<BEncodedValue> (ToFileInfoDict);
+            List<BEncodedValue> files = mappings.ConvertAll (ToFileInfoDict);
             info.Add ("files", new BEncodedList (files));
         }
 
@@ -298,19 +298,19 @@ namespace MonoTorrent.Common {
         {
             Check.Result (result);
 
-            if (result != this.asyncResult)
+            if (result != asyncResult)
                 throw new ArgumentException ("The supplied async result does not correspond to currently active async result");
 
             try {
                 if (!result.IsCompleted)
                     result.AsyncWaitHandle.WaitOne ();
 
-                if (this.asyncResult.SavedException != null)
-                    throw this.asyncResult.SavedException;
+                if (asyncResult.SavedException != null)
+                    throw asyncResult.SavedException;
 
-                return this.asyncResult.Aborted ? null : this.asyncResult.Dictionary;
+                return asyncResult.Aborted ? null : asyncResult.Dictionary;
             } finally {
-                this.asyncResult = null;
+                asyncResult = null;
             }
         }
 
@@ -332,7 +332,7 @@ namespace MonoTorrent.Common {
 
         void RaiseHashed (TorrentCreatorEventArgs e)
         {
-            Toolbox.RaiseAsyncEvent<TorrentCreatorEventArgs> (Hashed, this, e);
+            Toolbox.RaiseAsyncEvent (Hashed, this, e);
         }
 
         TorrentFile ToTorrentFile (FileMapping mapping)

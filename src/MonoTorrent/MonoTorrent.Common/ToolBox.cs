@@ -26,42 +26,38 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
 using System;
-using System.Collections;
-using System.Text;
 using System.Collections.Generic;
 using System.Threading;
 using MonoTorrent.Client.Encryption;
 
 namespace MonoTorrent.Common
 {
-	public delegate long Operation<T>(T target);
+    public delegate long Operation<T>(T target);
 
     public static class Toolbox
     {
         private static Random r = new Random();
-		public static int Count<T>(IEnumerable<T> enumerable, Predicate<T> predicate)
-		{
-			int count = 0;
+        public static int Count<T>(IEnumerable<T> enumerable, Predicate<T> predicate)
+        {
+            int count = 0;
 
-			foreach (T t in enumerable)
-				if (predicate(t))
-					count++;
+            foreach (T t in enumerable)
+                if (predicate(t))
+                    count++;
 
-			return count;
-		}
+            return count;
+        }
 
-		public static long Accumulate<T>(IEnumerable<T> enumerable, Operation<T> action)
-		{
+        public static long Accumulate<T>(IEnumerable<T> enumerable, Operation<T> action)
+        {
             long count = 0;
 
-			foreach (T t in enumerable)
-				count += action(t);
-		
-			return count;
-		}
+            foreach (T t in enumerable)
+                count += action(t);
+        
+            return count;
+        }
 
         public static void RaiseAsyncEvent<T>(EventHandler<T> e, object o, T args)
             where T : EventArgs

@@ -27,8 +27,6 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MonoTorrent.Common
 {
@@ -46,12 +44,12 @@ namespace MonoTorrent.Common
 
         public int Rate
         {
-            get { return this.speed; }
+            get { return speed; }
         }
 
         public long Total
         {
-            get { return this.total; }
+            get { return total; }
         }
 
 
@@ -66,31 +64,31 @@ namespace MonoTorrent.Common
             if (averagingPeriod < 0)
                 throw new ArgumentOutOfRangeException ("averagingPeriod");
 
-            this.lastUpdated = DateTime.UtcNow;
-            this.speeds = new int [Math.Max (1, averagingPeriod)];
-            this.speedsIndex = -speeds.Length;
+            lastUpdated = DateTime.UtcNow;
+            speeds = new int [Math.Max (1, averagingPeriod)];
+            speedsIndex = -speeds.Length;
         }
 
 
         public void AddDelta(int speed)
         {
-            this.total += speed;
-            this.tempRecvCount += speed;
+            total += speed;
+            tempRecvCount += speed;
         }
 
         public void AddDelta(long speed)
         {
-            this.total += speed;
-            this.tempRecvCount += speed;
+            total += speed;
+            tempRecvCount += speed;
         }
 
         public void Reset()
         {
-            this.total = 0;
-            this.speed = 0;
-            this.tempRecvCount = 0;
-            this.lastUpdated = DateTime.UtcNow;
-            this.speedsIndex = -speeds.Length;
+            total = 0;
+            speed = 0;
+            tempRecvCount = 0;
+            lastUpdated = DateTime.UtcNow;
+            speedsIndex = -speeds.Length;
         }
 
         private void TimePeriodPassed(int difference)

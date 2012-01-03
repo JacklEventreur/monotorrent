@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,8 +11,7 @@ namespace MonoTorrent
             get; set;
         }
 
-        public RawTrackerTiers ()
-            : this (new BEncodedList ())
+        public RawTrackerTiers () : this (new BEncodedList ())
         {
         }
 

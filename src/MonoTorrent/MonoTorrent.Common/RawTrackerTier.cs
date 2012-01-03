@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -17,8 +16,7 @@ namespace MonoTorrent
             get; set;
         }
 
-        public RawTrackerTier ()
-            : this (new BEncodedList ())
+        public RawTrackerTier () : this (new BEncodedList ())
         {
         }
 
@@ -27,8 +25,7 @@ namespace MonoTorrent
             Tier = tier;
         }
 
-        public RawTrackerTier (IEnumerable<string> announces)
-            : this ()
+        public RawTrackerTier (IEnumerable<string> announces) : this ()
         {
             foreach (var v in announces)
                 Add (v);
