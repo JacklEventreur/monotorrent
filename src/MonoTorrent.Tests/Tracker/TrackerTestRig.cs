@@ -1,16 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using MonoTorrent.Tracker;
 using MonoTorrent.Tracker.Listeners;
 using System.Collections.Specialized;
 using System.Net;
-using System.Web;
 using MonoTorrent.BEncoding;
 
 namespace MonoTorrent.Tracker
 {
-    public class CustomComparer : MonoTorrent.Tracker.IPeerComparer
+    public class CustomComparer : IPeerComparer
     {
         public new bool Equals(object left, object right)
         {
@@ -29,7 +26,7 @@ namespace MonoTorrent.Tracker
 
     public class CustomListener : ListenerBase
     {
-        public BEncodedValue Handle(PeerDetails d, MonoTorrent.Common.TorrentEvent e, ITrackable trackable)
+        public BEncodedValue Handle(PeerDetails d, Common.TorrentEvent e, ITrackable trackable)
         {
             NameValueCollection c = new NameValueCollection();
             c.Add("info_hash", trackable.InfoHash.UrlEncode());
@@ -104,7 +101,7 @@ namespace MonoTorrent.Tracker
 
         public TrackerTestRig()
         {
-            Tracker = new MonoTorrent.Tracker.Tracker();
+            Tracker = new Tracker();
             Listener = new CustomListener();
             Tracker.RegisterListener(Listener);
 

@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using MonoTorrent.Client.Tracker;
-using MonoTorrent.Client;
 using System.Threading;
 using MonoTorrent.Common;
 
@@ -27,9 +24,9 @@ namespace MonoTorrent.Tracker
         [TestFixtureSetUp]
         public void FixtureSetup()
         {
-            listener = new MonoTorrent.Tracker.Listeners.HttpListener(uri.OriginalString);
+            listener = new Listeners.HttpListener(uri.OriginalString);
             listener.Start();
-            server = new MonoTorrent.Tracker.Tracker();
+            server = new Tracker();
             server.RegisterListener(listener);
             listener.Start();
         }
@@ -64,8 +61,8 @@ namespace MonoTorrent.Tracker
                         handle.Set();
                 };
                 TrackerConnectionID id = new TrackerConnectionID(tier.Trackers[0], false, TorrentEvent.Started, new ManualResetEvent(false));
-                MonoTorrent.Client.Tracker.AnnounceParameters parameters;
-                parameters = new MonoTorrent.Client.Tracker.AnnounceParameters(0, 0, 0, TorrentEvent.Started,
+                Client.Tracker.AnnounceParameters parameters;
+                parameters = new Client.Tracker.AnnounceParameters(0, 0, 0, TorrentEvent.Started,
                                                                        infoHash, false, new string('1', 20), "", 1411);
                 tier.Trackers[0].Announce(parameters, id);
             }
