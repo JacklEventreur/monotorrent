@@ -1,7 +1,6 @@
 #if !DISABLE_DHT
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using System.Net;
 using MonoTorrent.Dht.Tasks;
@@ -79,9 +78,9 @@ namespace MonoTorrent.Dht
             task.Execute();
 
             Assert.IsTrue(handle.WaitOne(3000, false), "#1");
-            System.Threading.Thread.Sleep(200);
+            Thread.Sleep(200);
             Assert.AreEqual(1, counter, "#2");
-            Node n = engine.RoutingTable.FindNode(this.node.Id);
+            Node n = engine.RoutingTable.FindNode(node.Id);
             Assert.IsNotNull(n, "#3");
             Assert.IsTrue(n.LastSeen > DateTime.UtcNow.AddSeconds(-2));
         }
@@ -173,7 +172,7 @@ namespace MonoTorrent.Dht
             engine.Add(nodes);
             engine.Start();
 
-            System.Threading.Thread.Sleep(500);
+            Thread.Sleep(500);
             foreach (Bucket b in engine.RoutingTable.Buckets)
             {
                 Assert.IsTrue(b.LastChanged > DateTime.UtcNow.AddSeconds(-2));

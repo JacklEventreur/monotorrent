@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Reflection;
 using NUnit.Framework;
-using MonoTorrent.Common;
 using MonoTorrent.BEncoding;
 using MonoTorrent.Client;
 using System.IO;
@@ -117,7 +116,7 @@ namespace MonoTorrent.Common
         [Test]
         public void CreateSingleFromFolder()
         {
-            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            Assembly assembly = Assembly.GetExecutingAssembly();
             BEncodedDictionary dict = creator.Create(new TorrentFileSource(assembly.Location));
 
             Torrent t = Torrent.Load(dict);

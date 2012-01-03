@@ -28,11 +28,9 @@
 
 
 using System;
-using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using MonoTorrent.Common;
-using System.Net;
 using MonoTorrent.Client.Messages;
 using MonoTorrent.Client.Messages.Standard;
 using MonoTorrent.BEncoding;
@@ -179,21 +177,18 @@ namespace MonoTorrent.Client
             Assert.AreEqual(orig.Encode(), dec.Encode());
         }
 
-
-
         [Test]
         public void HaveEncoding()
         {
             int length = new HaveMessage(150).Encode(buffer, offset);
             Assert.AreEqual("00-00-00-05-04-00-00-00-96", BitConverter.ToString(buffer, offset, length));
         }
+
         [Test]
         public void HaveDecoding()
         {
             EncodeDecode(new HaveMessage(34622));
         }
-
-
 
         [Test]
         public void InterestedEncoding()
@@ -207,8 +202,6 @@ namespace MonoTorrent.Client
             EncodeDecode(new InterestedMessage());
         }
 
-
-
         [Test]
         public void KeepAliveEncoding()
         {
@@ -218,13 +211,12 @@ namespace MonoTorrent.Client
                             && buffer[offset + 2] == 0
                             && buffer[offset + 3] == 0);
         }
+
         [Test]
         public void KeepAliveDecoding()
         {
             
         }
-
-
 
         [Test]
         public void NotInterestedEncoding()
@@ -238,8 +230,6 @@ namespace MonoTorrent.Client
             EncodeDecode(new NotInterestedMessage());
         }
 
-
-
         [Test]
         public void PieceEncoding()
         {
@@ -247,6 +237,7 @@ namespace MonoTorrent.Client
             message.Data = new byte[Piece.BlockSize];
             message.Encode(buffer, offset);
         }
+
         [Test]
         public void PieceDecoding()
         {
@@ -254,8 +245,6 @@ namespace MonoTorrent.Client
             message.Data = new byte[Piece.BlockSize];
             EncodeDecode(message);
         }
-
-
 
         [Test]
         public void PortEncoding()
@@ -269,8 +258,6 @@ namespace MonoTorrent.Client
             EncodeDecode(new PortMessage(5452));
         }
 
-
-
         [Test]
         public void RequestEncoding()
         {
@@ -282,8 +269,6 @@ namespace MonoTorrent.Client
         {
             EncodeDecode(new RequestMessage(123, 789, 4235));
         }
-
-
 
         [Test]
         public void UnchokeEncoding()
@@ -297,16 +282,16 @@ namespace MonoTorrent.Client
             EncodeDecode(new UnchokeMessage());
         }
 
-		[Test]
-		public void PeerExchangeMessageTest ()
-		{
-			var data = new BEncodedDictionary ().Encode ();
-			var message = new PeerExchangeMessage ();
-			message.Decode (data, 0, data.Length);
-			Assert.IsNotNull (message.Added, "#1");
-			Assert.IsNotNull (message.AddedDotF, "#1");
-			Assert.IsNotNull (message.Dropped, "#1");
-		}
+        [Test]
+        public void PeerExchangeMessageTest ()
+        {
+            var data = new BEncodedDictionary ().Encode ();
+            var message = new PeerExchangeMessage ();
+            message.Decode (data, 0, data.Length);
+            Assert.IsNotNull (message.Added, "#1");
+            Assert.IsNotNull (message.AddedDotF, "#1");
+            Assert.IsNotNull (message.Dropped, "#1");
+        }
 
         private void EncodeDecode(Message orig)
         {

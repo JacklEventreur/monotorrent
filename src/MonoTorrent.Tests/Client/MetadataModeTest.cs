@@ -1,5 +1,4 @@
-﻿using MonoTorrent.Client;
-using MonoTorrent.Client.Encryption;
+﻿using MonoTorrent.Client.Encryption;
 using MonoTorrent.Client.Messages;
 using MonoTorrent.Client.Messages.Libtorrent;
 using MonoTorrent.Client.Messages.Standard;
@@ -7,7 +6,6 @@ using MonoTorrent.Common;
 using NUnit.Framework;
 using System;
 using System.IO;
-using System.Net;
 using System.Security.Cryptography;
 
 namespace MonoTorrent.Client

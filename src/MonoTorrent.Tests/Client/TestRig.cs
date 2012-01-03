@@ -5,7 +5,6 @@ using MonoTorrent.Client.Connections;
 using MonoTorrent.BEncoding;
 using MonoTorrent.Client.Tracker;
 using MonoTorrent.Client.PieceWriters;
-using MonoTorrent.Client;
 using MonoTorrent.Common;
 using System.Net.Sockets;
 using System.Net;
@@ -61,7 +60,7 @@ namespace MonoTorrent.Client
         }
     }
 
-    public class CustomTracker : MonoTorrent.Client.Tracker.Tracker
+    public class CustomTracker : Tracker.Tracker
     {
         public List<DateTime> AnnouncedAt = new List<DateTime>();
         public List<DateTime> ScrapedAt = new List<DateTime>();
@@ -394,11 +393,13 @@ namespace MonoTorrent.Client
 
         public CustomTracker Tracker
         {
-            get { return (CustomTracker)this.manager.TrackerManager.CurrentTracker; }
+            get { return (CustomTracker)manager.TrackerManager.CurrentTracker; }
         }
 
 
-        string savePath; int piecelength; string[][] tier;
+        string savePath; 
+        int piecelength; 
+        string[][] tier;
 
         public void AddConnection(IConnection connection)
         {
@@ -416,7 +417,7 @@ namespace MonoTorrent.Client
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 20; i++)
-                sb.Append((char)Random.Next((int)'a', (int)'z'));
+                sb.Append((char)Random.Next('a', 'z'));
             Peer peer = new Peer(sb.ToString(), new Uri("tcp://127.0.0.1:" + (port++)));
             PeerId id = new PeerId(peer, Manager);
             id.SupportsFastPeer = supportsFastPeer;

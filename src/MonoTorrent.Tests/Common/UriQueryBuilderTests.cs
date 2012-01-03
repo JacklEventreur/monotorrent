@@ -32,15 +32,14 @@
 
 using System;
 using NUnit.Framework;
-using System.Web;
 
 namespace MonoTorrent.Common
 {
-	[TestFixture]
-	public class UriQueryBuilderTest
-	{
+    [TestFixture]
+    public class UriQueryBuilderTest
+    {
 
-		[Test]
+        [Test]
         public void TestToString ()
         {
             UriQueryBuilder bld = new UriQueryBuilder("http://mytest.com/announce.aspx?key=1");
@@ -89,5 +88,5 @@ namespace MonoTorrent.Common
             b ["Test"] = "7";
             Assert.AreEqual ("7", b ["Test"], "#1");
         }
-	}
+    }
 }

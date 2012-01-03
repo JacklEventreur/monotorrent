@@ -1,8 +1,4 @@
 #if !DISABLE_DHT
-using System;
-using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
 using MonoTorrent.Dht.Listeners;
 using MonoTorrent.Dht.Messages;
 using System.Net;
@@ -13,8 +9,7 @@ namespace MonoTorrent.Dht
     {
         private bool started;
 
-        public TestListener()
-            : base(new IPEndPoint(IPAddress.Loopback, 0))
+        public TestListener() : base(new IPEndPoint(IPAddress.Loopback, 0))
         {
 
         }

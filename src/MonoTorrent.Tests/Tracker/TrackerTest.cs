@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
-using MonoTorrent.Tracker;
 using MonoTorrent.Common;
 using MonoTorrent.BEncoding;
 using System.Net;
@@ -58,7 +55,7 @@ namespace MonoTorrent.Tracker
         public void AnnouncePeersTest()
         {
             AddAllTrackables();
-            rig.Peers.ForEach(delegate(PeerDetails d) { rig.Listener.Handle(d, MonoTorrent.Common.TorrentEvent.Started, rig.Trackables[0]); });
+            rig.Peers.ForEach(delegate(PeerDetails d) { rig.Listener.Handle(d, TorrentEvent.Started, rig.Trackables[0]); });
 
             SimpleTorrentManager manager = rig.Tracker.GetManager(rig.Trackables[0]);
 

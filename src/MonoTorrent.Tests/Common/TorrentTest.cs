@@ -30,12 +30,10 @@
 
 
 using System;
+using System.Security.Cryptography;
 using NUnit.Framework;
-using MonoTorrent.Common;
-using System.Diagnostics;
 using System.IO;
 using MonoTorrent.BEncoding;
-using MonoTorrent.Client;
 
 namespace MonoTorrent.Common
 {
@@ -50,7 +48,7 @@ namespace MonoTorrent.Common
         //}
         private Torrent torrent;
         private long creationTime;
-        private System.Security.Cryptography.SHA1 sha = System.Security.Cryptography.SHA1.Create();
+        private SHA1 sha = System.Security.Cryptography.SHA1.Create();
 
         /// <summary>
         /// 
@@ -171,7 +169,7 @@ namespace MonoTorrent.Common
         public void AnnounceUrl()
         {
             Assert.IsTrue(torrent.AnnounceUrls.Count == 1);
-			Assert.IsTrue(torrent.AnnounceUrls[0].Count == 1);
+            Assert.IsTrue(torrent.AnnounceUrls[0].Count == 1);
             Assert.IsTrue(torrent.AnnounceUrls[0][0] == "http://myannouceurl/announce");
         }
 

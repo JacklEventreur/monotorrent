@@ -1,11 +1,8 @@
 #if !DISABLE_DHT
-using System;
-using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using MonoTorrent.Dht.Messages;
 using MonoTorrent.BEncoding;
-using MonoTorrent.Common;
 
 namespace MonoTorrent.Dht
 {
@@ -41,7 +38,7 @@ namespace MonoTorrent.Dht
         [Test]
         public void AnnouncePeerEncode()
         {
-            Node n = new MonoTorrent.Dht.Node(NodeId.Create(), null);
+            Node n = new Node(NodeId.Create(), null);
             n.Token = token;
             AnnouncePeer m = new AnnouncePeer(id, infohash, 6881, token);
             m.TransactionId = transactionId;

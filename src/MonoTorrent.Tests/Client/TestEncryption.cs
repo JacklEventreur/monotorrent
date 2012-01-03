@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using System.Threading;
 using MonoTorrent.Client.Messages.Standard;
@@ -53,7 +51,7 @@ namespace MonoTorrent.Client
 
             for (int i = 0; i < 1000; i++)
             {
-                System.Threading.Thread.Sleep(4);
+                Thread.Sleep(4);
                 bool result = true;
                 foreach (var torrent in rig.Engine.Torrents)
                     result &= torrent.State == TorrentState.Stopped;

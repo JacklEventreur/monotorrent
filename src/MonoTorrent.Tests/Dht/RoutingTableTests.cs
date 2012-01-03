@@ -1,8 +1,5 @@
 #if !DISABLE_DHT
-using System;
 using System.Collections.Generic;
-using System.Text;
-using MonoTorrent.Dht;
 using NUnit.Framework;
 using System.Net;
 
@@ -29,7 +26,7 @@ namespace MonoTorrent.Dht
         {
             id = new byte[20];
             id[1] = 128;
-            n = new Node(new NodeId(id), new System.Net.IPEndPoint(IPAddress.Any, 0));
+            n = new Node(new NodeId(id), new IPEndPoint(IPAddress.Any, 0));
             table = new RoutingTable(n);
             table.NodeAdded += delegate { addedCount++; };
             table.Add(n);//the local node is no more in routing table so add it to show test is still ok

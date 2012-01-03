@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using MonoTorrent.Client.Tracker;
-using MonoTorrent.Client;
 using System.Threading;
 
 namespace MonoTorrent.Client
@@ -71,13 +69,13 @@ namespace MonoTorrent.Client
         {
             rig.RecreateManager();
             trackerManager = rig.Manager.TrackerManager;
-            this.trackers = new List<List<CustomTracker>>();
+            trackers = new List<List<CustomTracker>>();
             foreach (TrackerTier t in trackerManager)
             {
                 List<CustomTracker> list = new List<CustomTracker>();
                 foreach (Tracker.Tracker tracker in t)
                     list.Add((CustomTracker)tracker);
-                this.trackers.Add(list);
+                trackers.Add(list);
             }
         }
 

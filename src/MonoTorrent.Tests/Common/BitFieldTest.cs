@@ -26,8 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
 using System;
 using NUnit.Framework;
 using MonoTorrent.Client;
@@ -58,7 +56,7 @@ namespace MonoTorrent.Common
         {
             BitField bf2 = new BitField(initialByteValues, initalValues.Length);
             Assert.AreEqual(bf, bf2, "#1");
-            Assert.AreEqual(Toolbox.Count<bool>(initalValues, delegate(bool b) { return b; }), bf2.TrueCount, "#1");
+            Assert.AreEqual(Toolbox.Count(initalValues, delegate(bool b) { return b; }), bf2.TrueCount, "#1");
         }
 
         [Test]
@@ -67,7 +65,7 @@ namespace MonoTorrent.Common
             for (int i = 0; i < initalValues.Length; i++)
                 Assert.AreEqual(initalValues[i], bf[i], "#1:{0}", i);
 
-            Assert.AreEqual(Toolbox.Count<bool>(initalValues, delegate(bool b) { return b; }), bf.TrueCount, "#1");
+            Assert.AreEqual(Toolbox.Count(initalValues, delegate(bool b) { return b; }), bf.TrueCount, "#1");
         }
 
         [Ignore("This is deliberately broken to work around bugs in azureus")]
@@ -291,7 +289,7 @@ namespace MonoTorrent.Common
             for (int i = 0; i < bf.Length; i++)
                 Assert.AreEqual(!initalValues[i], bf[i], "#1");
 
-            Assert.AreEqual(Toolbox.Count<bool>(initalValues, delegate(bool b) { return !b; }), bf.TrueCount, "#2");
+            Assert.AreEqual(Toolbox.Count(initalValues, delegate(bool b) { return !b; }), bf.TrueCount, "#2");
         }
 
         [Test]

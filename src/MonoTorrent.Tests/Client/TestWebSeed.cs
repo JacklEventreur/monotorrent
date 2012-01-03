@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using MonoTorrent.Client.Connections;
 using System.Net;
 using MonoTorrent.Client.Messages.Standard;
-using MonoTorrent.Client;
 using System.Threading;
 using MonoTorrent.Client.Messages;
 using System.Text.RegularExpressions;
@@ -201,7 +199,7 @@ namespace MonoTorrent.Client
                 }
             }
 
-            Uri baseUri = new Uri(this.listenerURL);
+            Uri baseUri = new Uri(listenerURL);
             baseUri = new Uri(baseUri, rig.Manager.Torrent.Name + "/");
             if (rig.Manager.Torrent.Files.Length > 1)
             {

@@ -1,13 +1,11 @@
 #if !DISABLE_DHT
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Net;
 
 namespace MonoTorrent.Dht
 {
-	static class TestHelper
-	{
+    static class TestHelper
+    {
         internal static void ManyNodes(out RoutingTable routingTable, out List<NodeId> nodes)
         {
             // Generate our local id
@@ -38,6 +36,6 @@ namespace MonoTorrent.Dht
             nodes.RemoveAll(delegate(NodeId n) { return table.FindNode(n) == null; });
             routingTable = table;
         }
-	}
+    }
 }
 #endif

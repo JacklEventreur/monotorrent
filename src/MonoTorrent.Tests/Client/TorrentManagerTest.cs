@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
-using MonoTorrent.Client.Connections;
 using MonoTorrent.Client.Messages.Standard;
 using MonoTorrent.Common;
 using MonoTorrent.Client.Messages;
@@ -160,7 +157,7 @@ namespace MonoTorrent.Client
             };
             rig.Torrent.AnnounceUrls.Add (tier);
             TorrentManager manager = new TorrentManager (rig.Torrent, "", new TorrentSettings());
-            foreach (MonoTorrent.Client.Tracker.TrackerTier t in manager.TrackerManager)
+            foreach (Tracker.TrackerTier t in manager.TrackerManager)
             {
                 Assert.IsTrue (t.Trackers.Count > 0, "#1");
             }

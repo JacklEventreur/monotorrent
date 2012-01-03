@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
-using MonoTorrent.Client;
 using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
@@ -61,7 +59,7 @@ namespace MonoTorrent.Client
             BitField bf = tester.PickPieceBitfield[0];
             int[] trueIndices = new int[] { 1, 7, 11, 13, 17, 19, 23, 29, 31, 37 };
             for (int i = 0; i < bf.Length; i++)
-                if (Array.IndexOf<int>(trueIndices, i) > -1)
+                if (Array.IndexOf(trueIndices, i) > -1)
                     Assert.IsTrue(bf[i]);
                 else
                     Assert.IsFalse(bf[i]);
@@ -69,7 +67,7 @@ namespace MonoTorrent.Client
             bf = tester.PickPieceBitfield[1];
             trueIndices = new int[] { 1, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37 };
             for (int i = 0; i < bf.Length; i++)
-                if (Array.IndexOf<int>(trueIndices, i) > -1)
+                if (Array.IndexOf(trueIndices, i) > -1)
                     Assert.IsTrue(bf[i]);
                 else
                     Assert.IsFalse(bf[i]);

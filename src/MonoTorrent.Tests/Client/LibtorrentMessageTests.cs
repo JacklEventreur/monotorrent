@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using MonoTorrent.Client.Messages.Libtorrent;
 using MonoTorrent.Client.Messages;
@@ -78,13 +75,13 @@ namespace MonoTorrent.Client
         {
             // Decodes as: 192.168.0.1:100
             byte[] peer = new byte[] { 192, 168, 0, 1, 100, 0 };
-            byte[] supports = new byte[] { (byte)(1 | 2) }; // 1 == encryption, 2 == seeder
+            byte[] supports = new byte[] { 1 | 2 }; // 1 == encryption, 2 == seeder
 
-            byte id = MonoTorrent.Client.Messages.Libtorrent.PeerExchangeMessage.Support.MessageId;
+            byte id = PeerExchangeMessage.Support.MessageId;
             PeerExchangeMessage message = new PeerExchangeMessage(id, peer, supports, null);
 
             byte[] buffer = message.Encode();
-            PeerExchangeMessage m = (PeerExchangeMessage)PeerMessage.DecodeMessage(buffer, 0, buffer.Length, this.rig.Manager);
+            PeerExchangeMessage m = (PeerExchangeMessage)PeerMessage.DecodeMessage(buffer, 0, buffer.Length, rig.Manager);
             Assert.IsTrue(Toolbox.ByteMatch(peer, m.Added), "#1");
             Assert.IsTrue(Toolbox.ByteMatch(supports, m.AddedDotF), "#1");
         }

@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
-using MonoTorrent.Client;
 using System.Net;
 using System.Net.Sockets;
 

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using MonoTorrent.Client.Tracker;
 using MonoTorrent.Common;
@@ -82,7 +81,7 @@ namespace MonoTorrent.Client
                 p = e;
                 id.WaitHandle.Set();
             };
-            MonoTorrent.Client.Tracker.AnnounceParameters pars = new AnnounceParameters();
+            AnnounceParameters pars = new AnnounceParameters();
             pars.PeerId = "id";
             pars.InfoHash = new InfoHash (new byte[20]);
 
@@ -96,7 +95,7 @@ namespace MonoTorrent.Client
         [Test]
         public void KeyTest()
         {
-            MonoTorrent.Client.Tracker.AnnounceParameters pars = new AnnounceParameters();
+            AnnounceParameters pars = new AnnounceParameters();
             pars.PeerId = "id";
             pars.InfoHash = new InfoHash (new byte[20]);
 
@@ -120,7 +119,7 @@ namespace MonoTorrent.Client
                 p = e;
                 id.WaitHandle.Set();
             };
-            MonoTorrent.Client.Tracker.AnnounceParameters pars = new AnnounceParameters();
+            AnnounceParameters pars = new AnnounceParameters();
             pars.PeerId = "id";
             pars.InfoHash = new InfoHash(new byte[20]);
 

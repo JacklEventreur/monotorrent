@@ -1,7 +1,6 @@
 #if !DISABLE_DHT
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using System.Net;
 using MonoTorrent.BEncoding;

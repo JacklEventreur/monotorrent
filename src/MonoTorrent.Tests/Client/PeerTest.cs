@@ -28,9 +28,6 @@
 
 
 using System;
-using System.Net;
-using MonoTorrent.BEncoding;
-using MonoTorrent.Client;
 using NUnit.Framework;
 
 namespace MonoTorrent.Client
@@ -45,7 +42,7 @@ namespace MonoTorrent.Client
             Uri uri = new Uri("tcp://192.168.0.5:12345");
             Peer p = new Peer(peerId, uri);
             byte[] compact = p.CompactPeer();
-            Peer peer = Peer.Decode((BEncoding.BEncodedString)compact)[0];
+            Peer peer = Peer.Decode(compact)[0];
             Assert.AreEqual(p.ConnectionUri, peer.ConnectionUri);
         }
     }

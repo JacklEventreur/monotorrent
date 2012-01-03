@@ -27,10 +27,7 @@
 //
 
 
-using System;
 using System.Collections.Generic;
-using System.Text;
-using MonoTorrent.Client;
 using MonoTorrent.Common;
 using MonoTorrent.Client.Messages;
 

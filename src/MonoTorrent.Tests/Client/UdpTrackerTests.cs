@@ -26,18 +26,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using MonoTorrent.Client.Messages.UdpTracker;
 using MonoTorrent.Client.Tracker;
 using MonoTorrent.Common;
-using MonoTorrent.Client;
 using System.Threading;
-using System.Net;
 
 namespace MonoTorrent.Client
 {
@@ -63,7 +58,7 @@ namespace MonoTorrent.Client
         }
 
         AnnounceParameters announceparams = new AnnounceParameters(100, 50, int.MaxValue,
-            MonoTorrent.Common.TorrentEvent.Completed,
+            TorrentEvent.Completed,
             new InfoHash (new byte[] { 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5 }),
             false, new string('a', 20), null, 1515);
         MonoTorrent.Tracker.Tracker server;
@@ -223,7 +218,7 @@ namespace MonoTorrent.Client
                 p = e;
                 id.WaitHandle.Set();
             };
-            MonoTorrent.Client.Tracker.AnnounceParameters pars = new AnnounceParameters();
+            AnnounceParameters pars = new AnnounceParameters();
             pars.InfoHash = new InfoHash(new byte[20]);
             pars.PeerId = "";
 
@@ -309,7 +304,7 @@ namespace MonoTorrent.Client
                 p = e;
                 id.WaitHandle.Set();
             };
-            MonoTorrent.Client.Tracker.AnnounceParameters pars = new AnnounceParameters();
+            AnnounceParameters pars = new AnnounceParameters();
             pars.InfoHash = new InfoHash(new byte[20]);
             pars.PeerId = "";
 
@@ -333,7 +328,7 @@ namespace MonoTorrent.Client
                 p = e;
                 id.WaitHandle.Set();
             };
-            MonoTorrent.Client.Tracker.ScrapeParameters pars = new ScrapeParameters(new InfoHash(new byte[20]));
+            ScrapeParameters pars = new ScrapeParameters(new InfoHash(new byte[20]));
 
             t.Scrape(pars, id);
             Wait(id.WaitHandle);
@@ -354,7 +349,7 @@ namespace MonoTorrent.Client
                 p = e;
                 id.WaitHandle.Set();
             };
-            MonoTorrent.Client.Tracker.ScrapeParameters pars = new ScrapeParameters(new InfoHash(new byte[20]));
+            ScrapeParameters pars = new ScrapeParameters(new InfoHash(new byte[20]));
 
             t.Scrape(pars, id);
             Wait(id.WaitHandle);
@@ -378,8 +373,7 @@ namespace MonoTorrent.Client
         public bool IgnoreErrors;
         public bool IgnoreScrapes;
 
-        public IgnoringListener(int port)
-            : base(port)
+        public IgnoringListener(int port) : base(port)
         {
 
         }

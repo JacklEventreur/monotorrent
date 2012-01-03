@@ -27,10 +27,6 @@
 //
 
 
-
-using System;
-using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Client.PieceWriters;
 using MonoTorrent.Common;
 
@@ -38,10 +34,6 @@ namespace MonoTorrent.Client
 {
     public class NullWriter : PieceWriter
     {
-        public NullWriter()
-        {
-
-        }
         public override int Read(TorrentFile file, long offset, byte[] buffer, int bufferOffset, int count)
         {
             return 0;

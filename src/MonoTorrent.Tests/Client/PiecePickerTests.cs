@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
-using MonoTorrent.Client;
 using MonoTorrent.Client.Messages.Standard;
-using MonoTorrent.Client.Messages.FastPeer;
 using MonoTorrent.Client.Messages;
 
 namespace MonoTorrent.Client
@@ -325,7 +322,7 @@ namespace MonoTorrent.Client
             peer.BitField.SetAll(true);
             picker = new StandardPicker();
             picker.Initialise(rig.Manager.Bitfield, rig.Torrent.Files, new List<Piece>());
-            MessageBundle bundle = picker.PickPiece(peer, new MonoTorrent.Common.BitField(peer.BitField.Length), peers, 1, 0, peer.BitField.Length);
+            MessageBundle bundle = picker.PickPiece(peer, new Common.BitField(peer.BitField.Length), peers, 1, 0, peer.BitField.Length);
             Assert.IsNull(bundle);
         }
 
@@ -339,7 +336,7 @@ namespace MonoTorrent.Client
             peer.BitField.SetAll(true);
             picker = new StandardPicker();
             picker.Initialise(rig.Manager.Bitfield, rig.Torrent.Files, new List<Piece>());
-            MessageBundle bundle = picker.PickPiece(peer, new MonoTorrent.Common.BitField(peer.BitField.Length), peers, 1, 0, peer.BitField.Length);
+            MessageBundle bundle = picker.PickPiece(peer, new Common.BitField(peer.BitField.Length), peers, 1, 0, peer.BitField.Length);
             Assert.IsNull(bundle);
         }
 

@@ -26,14 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
-
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
-using System.Threading;
 using NUnit.Framework;
 using MonoTorrent.Client.Messages.Standard;
 using MonoTorrent.Common;
@@ -177,8 +171,8 @@ namespace MonoTorrent.Client
 
             // 3) Receive remote bitfield - have none
             PeerMessage message = ReceiveMessage(connection);
-			Assert.IsTrue (message is HaveNoneMessage || message is BitfieldMessage, "HaveNone");
-			
+            Assert.IsTrue (message is HaveNoneMessage || message is BitfieldMessage, "HaveNone");
+            
             // 4) Send a few allowed fast
             SendMessage(new AllowedFastMessage(1), connection);
             SendMessage(new AllowedFastMessage(2), connection);

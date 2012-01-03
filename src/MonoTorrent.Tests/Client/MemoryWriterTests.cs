@@ -1,17 +1,11 @@
-using System;
-using System.Collections.Generic;
 using NUnit.Framework;
-using MonoTorrent.Client;
 using MonoTorrent.Client.PieceWriters;
-using MonoTorrent.Client.Messages.Standard;
 using MonoTorrent.Common;
-using System.Threading;
-using System.IO;
 
 namespace MonoTorrent.Client
 {
-	public class MemoryWriterTests
-	{
+    public class MemoryWriterTests
+    {
         byte[] buffer;
         MemoryWriter level1;
         MemoryWriter level2;
@@ -33,16 +27,16 @@ namespace MonoTorrent.Client
                 new TorrentFile ("third", Piece.BlockSize)
             };
             buffer = new byte[Piece.BlockSize];
-            torrentSize = Toolbox.Accumulate<TorrentFile>(multiFile, delegate(TorrentFile f) { return f.Length; });
+            torrentSize = Toolbox.Accumulate(multiFile, delegate(TorrentFile f) { return f.Length; });
         }
 
-		[SetUp]
-		public void Setup()
-		{
+        [SetUp]
+        public void Setup()
+        {
             Initialise(buffer, 1);
-			level2 = new MemoryWriter(new NullWriter(), Piece.BlockSize * 3);
+            level2 = new MemoryWriter(new NullWriter(), Piece.BlockSize * 3);
             level1 = new MemoryWriter(level2, Piece.BlockSize * 3);
-		}
+        }
 
         [Test]
         public void FillFirstBuffer()
@@ -106,10 +100,10 @@ namespace MonoTorrent.Client
         }
         
         void Initialise(byte[] buffer, byte value)
-		{
-			for (int i = 0; i < buffer.Length; i++)
-				buffer[i] = value;
-		}
+        {
+            for (int i = 0; i < buffer.Length; i++)
+                buffer[i] = value;
+        }
 
         void Verify(byte[] buffer, byte expected)
         {
@@ -121,5 +115,5 @@ namespace MonoTorrent.Client
             for (int i = startOffset; i < startOffset + count; i++)
                 Assert.AreEqual(buffer[i], expected, "#" + i);
         }
-	}
+    }
 }
