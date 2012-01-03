@@ -29,10 +29,8 @@
 
 
 using System;
-using System.Text;
 using System.Net;
 using System.Net.Sockets;
-using MonoTorrent.Client.Encryption;
 
 namespace MonoTorrent.Client.Connections
 {
@@ -62,7 +60,7 @@ namespace MonoTorrent.Client.Connections
 
         public IPEndPoint EndPoint
         {
-            get { return this.endPoint; }
+            get { return endPoint; }
         }
 
         public bool IsIncoming
@@ -88,14 +86,12 @@ namespace MonoTorrent.Client.Connections
             this.uri = uri;
         }
 
-        public IPV4Connection(IPEndPoint endPoint)
-            : this(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp), endPoint, false)
+        public IPV4Connection(IPEndPoint endPoint) : this(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp), endPoint, false)
         {
 
         }
 
-        public IPV4Connection(Socket socket, bool isIncoming)
-            : this(socket, (IPEndPoint)socket.RemoteEndPoint, isIncoming)
+        public IPV4Connection(Socket socket, bool isIncoming) : this(socket, (IPEndPoint)socket.RemoteEndPoint, isIncoming)
         {
 
         }
@@ -115,22 +111,22 @@ namespace MonoTorrent.Client.Connections
 
         public byte[] AddressBytes
         {
-            get { return this.endPoint.Address.GetAddressBytes(); }
+            get { return endPoint.Address.GetAddressBytes(); }
         }
 
         public IAsyncResult BeginConnect(AsyncCallback peerEndCreateConnection, object state)
         {
-            return this.socket.BeginConnect(this.endPoint, peerEndCreateConnection, state);
+            return socket.BeginConnect(endPoint, peerEndCreateConnection, state);
         }
 
         public IAsyncResult BeginReceive(byte[] buffer, int offset, int count, AsyncCallback asyncCallback, object state)
         {
-            return this.socket.BeginReceive(buffer, offset, count, SocketFlags.None, asyncCallback, state);
+            return socket.BeginReceive(buffer, offset, count, SocketFlags.None, asyncCallback, state);
         }
 
         public IAsyncResult BeginSend(byte[] buffer, int offset, int count, AsyncCallback asyncCallback, object state)
         {
-            return this.socket.BeginSend(buffer, offset, count, SocketFlags.None, asyncCallback, state);
+            return socket.BeginSend(buffer, offset, count, SocketFlags.None, asyncCallback, state);
         }
 
         public void Dispose()
@@ -140,18 +136,18 @@ namespace MonoTorrent.Client.Connections
 
         public void EndConnect(IAsyncResult result)
         {
-            this.socket.EndConnect(result);
+            socket.EndConnect(result);
         }
 
         public int EndSend(IAsyncResult result)
         {
-            return this.socket.EndSend(result);
+            return socket.EndSend(result);
         }
 
         public int EndReceive(IAsyncResult result)
         {
             
-            return this.socket.EndReceive(result);
+            return socket.EndReceive(result);
         }
 
         #endregion
