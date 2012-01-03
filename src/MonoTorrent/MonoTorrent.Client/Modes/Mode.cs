@@ -28,7 +28,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Client.Messages;
 using MonoTorrent.Common;
 using MonoTorrent.Client.Messages.FastPeer;
@@ -45,10 +44,10 @@ namespace MonoTorrent.Client
         int webseedCount;
         private TorrentManager manager;
 
-		public abstract TorrentState State
-		{
-			get;
-		}
+        public abstract TorrentState State
+        {
+            get;
+        }
 
         protected TorrentManager Manager
         {
@@ -128,16 +127,16 @@ namespace MonoTorrent.Client
             return ShouldConnect(peer.Peer);
         }
 
-		public virtual bool ShouldConnect(Peer peer)
+        public virtual bool ShouldConnect(Peer peer)
         {
             return true;
         }
 
-		public virtual bool CanHashCheck
-		{
-			get { return false; }
-		}
-		
+        public virtual bool CanHashCheck
+        {
+            get { return false; }
+        }
+        
         protected virtual void HandleGenericExtensionMessage(PeerId id, ExtensionMessage extensionMessage)
         {
             // Do nothing
@@ -190,7 +189,7 @@ namespace MonoTorrent.Client
             if ((Manager.Peers.Available + Manager.OpenConnections) >= manager.Settings.MaxConnections)
                 return;
 
-            IList<Peer> peers = Peer.Decode((BEncodedString)message.Added);
+            IList<Peer> peers = Peer.Decode(message.Added);
             int count = id.TorrentManager.AddPeersCore(peers);
             id.TorrentManager.RaisePeersFound(new PeerExchangePeersAdded(id.TorrentManager, count, peers.Count, id));
         }
@@ -555,17 +554,17 @@ namespace MonoTorrent.Client
                     Peer peer = new Peer(peerId, uri);
                     PeerId id = new PeerId(peer, manager);
                     HttpConnection connection = new HttpConnection(new Uri(s));
-                    connection.Manager = this.manager;
+                    connection.Manager = manager;
                     peer.IsSeeder = true;
                     id.BitField.SetAll(true);
                     id.Encryptor = new PlainTextEncryption();
                     id.Decryptor = new PlainTextEncryption();
                     id.IsChoking = false;
-					id.AmInterested = !manager.Complete;
+                    id.AmInterested = !manager.Complete;
                     id.Connection = connection;
-					id.ClientApp = new Software(id.PeerID);
+                    id.ClientApp = new Software(id.PeerID);
                     manager.Peers.ConnectedPeers.Add(id);
-					manager.RaisePeerConnected(new PeerConnectionEventArgs(manager, id, Direction.Outgoing));
+                    manager.RaisePeerConnected(new PeerConnectionEventArgs(manager, id, Direction.Outgoing));
                     PeerIO.EnqueueReceiveMessage (id.Connection, id.Decryptor, Manager.DownloadLimiter, id.Monitor, id.TorrentManager, id.ConnectionManager.messageReceivedCallback, id);
                 }
 

@@ -27,8 +27,6 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
 
 namespace MonoTorrent.BEncoding
@@ -45,8 +43,7 @@ namespace MonoTorrent.BEncoding
             get { return strictDecoding; }
         }
 
-        public RawReader(Stream input)
-            : this(input, true)
+        public RawReader(Stream input) : this(input, true)
         {
 
         }

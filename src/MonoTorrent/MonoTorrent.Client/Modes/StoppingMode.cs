@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MonoTorrent.Common;
+﻿using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
 {
@@ -39,7 +36,7 @@ namespace MonoTorrent.Client
 			engine.Stop();
 		}
 
-		public override void HandlePeerConnected(PeerId id, MonoTorrent.Common.Direction direction)
+		public override void HandlePeerConnected(PeerId id, Direction direction)
 		{
 			id.CloseConnection();
 		}

@@ -27,11 +27,7 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.BEncoding;
-using System.Security.Cryptography;
-using MonoTorrent.Common;
 using System.IO;
 
 namespace MonoTorrent.Client.Messages.Libtorrent
@@ -74,14 +70,12 @@ namespace MonoTorrent.Client.Messages.Libtorrent
         }
 
         //only for register
-        public LTMetadata()
-            : base(Support.MessageId)
+        public LTMetadata() : base(Support.MessageId)
         {
 
         }
 
-        public LTMetadata(PeerId id, eMessageType type, int piece)
-            : this (id, type, piece, null)
+        public LTMetadata(PeerId id, eMessageType type, int piece) : this (id, type, piece, null)
         {
 
         }
@@ -92,8 +86,7 @@ namespace MonoTorrent.Client.Messages.Libtorrent
 
         }
 
-        public LTMetadata(byte extensionId, eMessageType type, int piece, byte[] metadata)
-            : this()
+        public LTMetadata(byte extensionId, eMessageType type, int piece, byte[] metadata) : this()
         {
             ExtensionId = extensionId;
             this.messageType = type;
@@ -128,7 +121,7 @@ namespace MonoTorrent.Client.Messages.Libtorrent
             using (RawReader reader = new RawReader(new MemoryStream(buffer, offset, length, false), false))
             {
                 BEncodedDictionary d = BEncodedDictionary.Decode<BEncodedDictionary>(reader);
-                int totalSize = 0;
+                int totalSize;
 
                 if (d.TryGetValue(MessageTypeKey, out val))
                     messageType = (eMessageType)((BEncodedNumber)val).Number;
@@ -151,7 +144,7 @@ namespace MonoTorrent.Client.Messages.Libtorrent
             int written = offset;
             
             written += Write(buffer, written, ByteLength - 4);
-            written += Write(buffer, written, ExtensionMessage.MessageId);
+            written += Write(buffer, written, MessageId);
             written += Write(buffer, written, ExtensionId);
             written += dict.Encode(buffer, written);
             if (messageType == eMessageType.Data)

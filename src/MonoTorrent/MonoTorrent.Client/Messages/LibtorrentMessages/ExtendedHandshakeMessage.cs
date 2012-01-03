@@ -26,11 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
-using System;
-using System.Text;
-using MonoTorrent.Common;
 using MonoTorrent.BEncoding;
 using System.Collections.Generic;
 
@@ -89,14 +84,12 @@ namespace MonoTorrent.Client.Messages.Libtorrent
         }
 
         #region Constructors
-        public ExtendedHandshakeMessage()
-            : base(Support.MessageId)
+        public ExtendedHandshakeMessage() : base(Support.MessageId)
         {
-            supports = new ExtensionSupports(ExtensionMessage.SupportedMessages);
+            supports = new ExtensionSupports(SupportedMessages);
         }
 
-        public ExtendedHandshakeMessage(int metadataSize)
-            : this ()
+        public ExtendedHandshakeMessage(int metadataSize) : this ()
         {
             this.metadataSize = metadataSize;
         }
@@ -138,8 +131,8 @@ namespace MonoTorrent.Client.Messages.Libtorrent
             BEncodedDictionary dict = Create();
 
             written += Write(buffer, written, dict.LengthInBytes() + 1 + 1);
-            written += Write(buffer, written, ExtensionMessage.MessageId);
-            written += Write(buffer, written, ExtendedHandshakeMessage.Support.MessageId);
+            written += Write(buffer, written, MessageId);
+            written += Write(buffer, written, Support.MessageId);
             written += dict.Encode(buffer, written);
 
             CheckWritten(written - offset);

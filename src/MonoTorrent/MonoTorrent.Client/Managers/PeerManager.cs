@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
@@ -35,8 +33,8 @@ namespace MonoTorrent.Client
         {
             get
             {
-                return (int)ClientEngine.MainLoop.QueueWait((MainLoopJob)delegate {
-                    return Toolbox.Count<Peer>(ActivePeers, delegate(Peer p) { return !p.IsSeeder; });
+                return (int)ClientEngine.MainLoop.QueueWait(delegate {
+                            return Toolbox.Count<Peer>(ActivePeers, delegate(Peer p) { return !p.IsSeeder; });
                 });
             }
         }
@@ -49,8 +47,8 @@ namespace MonoTorrent.Client
         {
             get
             {
-                return (int)ClientEngine.MainLoop.QueueWait((MainLoopJob)delegate {
-                    return Toolbox.Count<Peer>(ActivePeers, delegate(Peer p) { return p.IsSeeder; });
+                return (int)ClientEngine.MainLoop.QueueWait(delegate {
+                            return Toolbox.Count<Peer>(ActivePeers, delegate(Peer p) { return p.IsSeeder; });
                 });
             }
         }
@@ -62,10 +60,10 @@ namespace MonoTorrent.Client
 
         public PeerManager()
         {
-            this.ActivePeers = new List<Peer>();
-            this.AvailablePeers = new List<Peer>();
-            this.BannedPeers = new List<Peer>();
-            this.BusyPeers = new List<Peer>();
+            ActivePeers = new List<Peer>();
+            AvailablePeers = new List<Peer>();
+            BannedPeers = new List<Peer>();
+            BusyPeers = new List<Peer>();
         }
 
         #endregion Constructors
@@ -90,10 +88,10 @@ namespace MonoTorrent.Client
 
         internal void ClearAll()
         {
-            this.ActivePeers.Clear();
-            this.AvailablePeers.Clear();
-            this.BannedPeers.Clear();
-            this.BusyPeers.Clear();
+            ActivePeers.Clear();
+            AvailablePeers.Clear();
+            BannedPeers.Clear();
+            BusyPeers.Clear();
         }
 
         internal bool Contains(Peer peer)

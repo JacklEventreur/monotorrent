@@ -26,11 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
-using System;
-using MonoTorrent.Common;
-
 namespace MonoTorrent.Client
 {
     /// <summary>
@@ -50,7 +45,7 @@ namespace MonoTorrent.Client
         
         public int NewPeers
         {
-            get { return this.count; }
+            get { return count; }
         }
         
         #endregion
@@ -61,8 +56,7 @@ namespace MonoTorrent.Client
         /// Creates a new PeersAddedEventArgs
         /// </summary>
         /// <param name="peersAdded">The number of peers just added</param>
-        protected PeersAddedEventArgs(TorrentManager manager, int peersAdded, int total)
-            : base(manager)
+        protected PeersAddedEventArgs(TorrentManager manager, int peersAdded, int total) : base(manager)
         {
             this.count = peersAdded;
             this.total = total;

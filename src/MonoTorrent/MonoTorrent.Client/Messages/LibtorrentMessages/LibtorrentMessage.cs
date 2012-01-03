@@ -28,8 +28,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using MonoTorrent.Client.Messages.Standard;
 
 namespace MonoTorrent.Client.Messages.Libtorrent
 {
@@ -67,7 +65,7 @@ namespace MonoTorrent.Client.Messages.Libtorrent
 
         public ExtensionMessage(byte messageId)
         {
-            this.extensionId = messageId;
+            extensionId = messageId;
         }
 
         public static void Register(byte identifier, CreateMessage creator)

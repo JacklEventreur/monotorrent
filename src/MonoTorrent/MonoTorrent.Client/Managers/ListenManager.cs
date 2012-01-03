@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Common;
 using MonoTorrent.Client.Encryption;
-using System.Net.Sockets;
 using MonoTorrent.Client.Messages.Standard;
 using MonoTorrent.Client.Messages;
 
@@ -61,12 +59,12 @@ namespace MonoTorrent.Client
 
         public void Register(PeerListener listener)
         {
-            listener.ConnectionReceived += new EventHandler<NewConnectionEventArgs>(ConnectionReceived);
+            listener.ConnectionReceived += ConnectionReceived;
         }
 
         public void Unregister(PeerListener listener)
         {
-            listener.ConnectionReceived -= new EventHandler<NewConnectionEventArgs>(ConnectionReceived);
+            listener.ConnectionReceived -= ConnectionReceived;
         }
 
         #endregion Public Methods
@@ -156,12 +154,12 @@ namespace MonoTorrent.Client
                 id.Connection.Dispose ();
                 return;
             }
-			if (man.State == TorrentState.Stopped)
-			{
-				Logger.Log(id.Connection, "ListenManager - Handshake requested for torrent which is not running");
-				id.Connection.Dispose ();
-				return;
-			}
+            if (man.State == TorrentState.Stopped)
+            {
+                Logger.Log(id.Connection, "ListenManager - Handshake requested for torrent which is not running");
+                id.Connection.Dispose ();
+                return;
+            }
             if (!man.Mode.CanAcceptConnections)
             {
                 Logger.Log(id.Connection, "ListenManager - Current mode does not support connections");

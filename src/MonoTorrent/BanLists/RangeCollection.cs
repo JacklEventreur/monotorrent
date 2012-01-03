@@ -29,7 +29,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MonoTorrent.Client
 {
@@ -98,7 +97,7 @@ namespace MonoTorrent.Client
             List<AddressRange> list = new List<AddressRange>(ranges);
             list.Sort(delegate(AddressRange x, AddressRange y) { return x.Start.CompareTo(y.Start); });
 
-            foreach (MonoTorrent.Client.AddressRange r in list)
+            foreach (AddressRange r in list)
                 Add(new AddressRange(r.Start, r.End));
         }
 

@@ -29,9 +29,7 @@
 
 using System;
 using System.Text;
-using System.Net.Sockets;
 using MonoTorrent.Common;
-using MonoTorrent.Client.Connections;
 using MonoTorrent.Client.Messages;
 
 namespace MonoTorrent.Client.Encryption
@@ -41,19 +39,18 @@ namespace MonoTorrent.Client.Encryption
     /// </summary>
     class PeerBEncryption : EncryptedSocket
     {
-        private InfoHash[] possibleSKEYs = null;
+        private InfoHash[] possibleSKEYs;
         private byte[] VerifyBytes;
 
         private AsyncCallback gotVerificationCallback;
         private AsyncCallback gotPadCCallback;
 
-        public PeerBEncryption(InfoHash[] possibleSKEYs, EncryptionTypes allowedEncryption)
-            : base(allowedEncryption)
+        public PeerBEncryption(InfoHash[] possibleSKEYs, EncryptionTypes allowedEncryption) : base(allowedEncryption)
         {
             this.possibleSKEYs = possibleSKEYs;
 
-            gotVerificationCallback = new AsyncCallback(gotVerification);
-            gotPadCCallback = new AsyncCallback(gotPadC);
+            gotVerificationCallback = gotVerification;
+            gotPadCCallback = gotPadC;
         }
 
         protected override void doneReceiveY()

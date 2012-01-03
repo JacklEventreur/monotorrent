@@ -27,17 +27,11 @@
 //
 
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Timers;
-using System.Threading;
-using MonoTorrent;
 using MonoTorrent.Common;
-using MonoTorrent.Client;
-using MonoTorrent.Client.Connections;
 using MonoTorrent.Client.Encryption;
 
 namespace MonoTorrent.Client
@@ -50,8 +44,7 @@ namespace MonoTorrent.Client
         private ClientEngine engine;
         private UdpClient udpClient;
 
-        public LocalPeerListener(ClientEngine engine)
-            : base(new IPEndPoint(IPAddress.Any, 6771))
+        public LocalPeerListener(ClientEngine engine) : base(new IPEndPoint(IPAddress.Any, 6771))
         {
             this.engine = engine;
         }
@@ -113,7 +106,7 @@ namespace MonoTorrent.Client
                 if (manager == null)
                     return;
 
-                Uri uri = new Uri("tcp://" + e.Address.ToString() + ':' + match.Groups["port"].Value);
+                Uri uri = new Uri("tcp://" + e.Address + ':' + match.Groups["port"].Value);
                 Peer peer = new Peer("", uri, EncryptionTypes.All);
 
                 // Add new peer to matched Torrent

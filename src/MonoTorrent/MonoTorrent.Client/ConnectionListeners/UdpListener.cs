@@ -29,11 +29,8 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Net.Sockets;
 using System.Net;
-using MonoTorrent.BEncoding;
 using MonoTorrent.Client;
 using MonoTorrent.Common;
 
@@ -44,8 +41,7 @@ namespace MonoTorrent
 
         private UdpClient client;
 
-        protected UdpListener(IPEndPoint endpoint)
-            :base(endpoint)
+        protected UdpListener(IPEndPoint endpoint) : base(endpoint)
         {
             
         }
@@ -92,7 +88,7 @@ namespace MonoTorrent
             }
         }
 
-		protected abstract void OnMessageReceived(byte[] buffer, IPEndPoint endpoint);
+        protected abstract void OnMessageReceived(byte[] buffer, IPEndPoint endpoint);
 
         public virtual void Send(byte[] buffer, IPEndPoint endpoint)
         {

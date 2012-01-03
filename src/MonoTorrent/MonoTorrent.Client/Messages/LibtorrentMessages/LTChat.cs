@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.BEncoding;
 
 namespace MonoTorrent.Client.Messages.Libtorrent
@@ -17,21 +14,18 @@ namespace MonoTorrent.Client.Messages.Libtorrent
             get { return ((BEncodedString)messageDict[MessageKey]).Text; }
         }
 
-        public LTChat()
-            : base(Support.MessageId)
+        public LTChat() : base(Support.MessageId)
         {
 
         }
 
-        internal LTChat(byte messageId, string message)
-            : this()
+        internal LTChat(byte messageId, string message) : this()
         {
             ExtensionId = messageId;
             Message = message;
         }
 
-        public LTChat(PeerId peer, string message)
-            : this()
+        public LTChat(PeerId peer, string message) : this()
         {
             ExtensionId = peer.ExtensionSupports.MessageId(Support);
             Message = message;
@@ -55,7 +49,7 @@ namespace MonoTorrent.Client.Messages.Libtorrent
             int written = offset;
 
             written += Write(buffer, offset, ByteLength - 4);
-            written += Write(buffer, written, ExtensionMessage.MessageId);
+            written += Write(buffer, written, MessageId);
             written += Write(buffer, written, ExtensionId);
             written += messageDict.Encode(buffer, written);
             

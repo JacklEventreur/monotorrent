@@ -1,7 +1,3 @@
-using System;
-using System.Text;
-using MonoTorrent.Common;
-
 namespace MonoTorrent.Client
 {
     public class BlockEventArgs : TorrentEventArgs
@@ -22,7 +18,7 @@ namespace MonoTorrent.Client
         /// </summary>
         public Block Block
         {
-            get { return this.block; }
+            get { return block; }
         }
 
 
@@ -31,7 +27,7 @@ namespace MonoTorrent.Client
         /// </summary>
         public Piece Piece
         {
-            get { return this.piece; }
+            get { return piece; }
         }
 
 
@@ -40,7 +36,7 @@ namespace MonoTorrent.Client
         /// </summary>
         public PeerId ID
         {
-            get { return this.id; }
+            get { return id; }
         }
 
         #endregion
@@ -53,8 +49,7 @@ namespace MonoTorrent.Client
         /// </summary>
         /// <param name="message">The peer message involved</param>
         /// <param name="direction">The direction of the message</param>
-        internal BlockEventArgs(TorrentManager manager, Block block, Piece piece, PeerId id)
-            : base(manager)
+        internal BlockEventArgs(TorrentManager manager, Block block, Piece piece, PeerId id) : base(manager)
         {
             Init(block, piece, id);
         }
@@ -74,14 +69,14 @@ namespace MonoTorrent.Client
         public override bool Equals(object obj)
         {
             BlockEventArgs args = obj as BlockEventArgs;
-            return (args == null) ? false : this.piece.Equals(args.piece)
-                                         && this.id.Equals(args.id)
-                                         && this.block.Equals(args.block);
+            return (args != null) && (piece.Equals(args.piece)
+                                  && (id.Equals(args.id))
+                                  && (block.Equals(args.block)));
         }
 
         public override int GetHashCode()
         {
-            return this.block.GetHashCode();
+            return block.GetHashCode();
         }
 
         #endregion Methods

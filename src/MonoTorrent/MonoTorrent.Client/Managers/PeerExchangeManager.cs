@@ -32,7 +32,6 @@ using System;
 using System.Collections.Generic;
 
 using MonoTorrent.Client.Messages.Libtorrent;
-using MonoTorrent.Common;
 using MonoTorrent.Client.Encryption;
 
 namespace MonoTorrent.Client
@@ -58,9 +57,9 @@ namespace MonoTorrent.Client
         {
             this.id = id;
 
-			this.addedPeers = new List<Peer>();
-			this.droppedPeers = new List<Peer>();
-            id.TorrentManager.OnPeerFound += new EventHandler<PeerAddedEventArgs>(OnAdd);
+            addedPeers = new List<Peer>();
+            droppedPeers = new List<Peer>();
+            id.TorrentManager.OnPeerFound += OnAdd;
             Start();
         }
 
@@ -123,7 +122,7 @@ namespace MonoTorrent.Client
                 return;
 
             disposed = true;
-            id.TorrentManager.OnPeerFound -= new EventHandler<PeerAddedEventArgs>(OnAdd);
+            id.TorrentManager.OnPeerFound -= OnAdd;
         }
 
         #endregion

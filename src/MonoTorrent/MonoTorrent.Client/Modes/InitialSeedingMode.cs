@@ -26,11 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
-using System;
-using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Common;
 using MonoTorrent.Client.Messages;
 using MonoTorrent.Client.Messages.FastPeer;
@@ -43,13 +38,12 @@ namespace MonoTorrent.Client
         BitField zero;
         InitialSeedUnchoker unchoker;
         
-		public override TorrentState State
-		{
-			get { return TorrentState.Seeding; }
-		}
+        public override TorrentState State
+        {
+            get { return TorrentState.Seeding; }
+        }
             
-        public InitialSeedingMode(TorrentManager manager)
-            : base(manager)
+        public InitialSeedingMode(TorrentManager manager) : base(manager)
         {
             unchoker = new InitialSeedUnchoker(manager);
             manager.chokeUnchoker = unchoker;

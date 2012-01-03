@@ -27,10 +27,6 @@
 //
 
 
-
-using System;
-using MonoTorrent.Common;
-
 namespace MonoTorrent.Client
 {
     /// <summary>
@@ -44,7 +40,7 @@ namespace MonoTorrent.Client
         /// </summary>
         public int PieceIndex
         {
-            get { return this.pieceIndex; }
+            get { return pieceIndex; }
         }
         private int pieceIndex;
 
@@ -54,7 +50,7 @@ namespace MonoTorrent.Client
         /// </summary>
         public bool HashPassed
         {
-            get { return this.hashPassed; }
+            get { return hashPassed; }
         }
         private bool hashPassed;
         #endregion
@@ -66,8 +62,7 @@ namespace MonoTorrent.Client
         /// </summary>
         /// <param name="pieceIndex">The index of the piece that was hashed</param>
         /// <param name="hashPassed">True if the piece passed the hashcheck, false otherwise</param>
-        public PieceHashedEventArgs(TorrentManager manager, int pieceIndex, bool hashPassed)
-            : base(manager)
+        public PieceHashedEventArgs(TorrentManager manager, int pieceIndex, bool hashPassed) : base(manager)
         {
             this.pieceIndex = pieceIndex;
             this.hashPassed = hashPassed;

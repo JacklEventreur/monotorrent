@@ -27,9 +27,6 @@
 //
 
 
-
-using System;
-using System.Text;
 using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
@@ -45,7 +42,7 @@ namespace MonoTorrent.Client
         /// </summary>
         public TorrentState OldState
         {
-            get { return this.oldState; }
+            get { return oldState; }
         }
         private TorrentState oldState;
 
@@ -55,7 +52,7 @@ namespace MonoTorrent.Client
         /// </summary>
         public TorrentState NewState
         {
-            get { return this.newState; }
+            get { return newState; }
         }
         private TorrentState newState;
         #endregion
@@ -67,8 +64,7 @@ namespace MonoTorrent.Client
         /// </summary>
         /// <param name="oldState">The old state of the Torrent</param>
         /// <param name="newState">The new state of the Torrent</param>
-        public TorrentStateChangedEventArgs(TorrentManager manager, TorrentState oldState, TorrentState newState)
-            : base(manager)
+        public TorrentStateChangedEventArgs(TorrentManager manager, TorrentState oldState, TorrentState newState) : base(manager)
         {
             this.oldState = oldState;
             this.newState = newState;

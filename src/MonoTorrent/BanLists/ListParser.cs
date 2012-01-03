@@ -26,10 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -41,7 +38,7 @@ namespace MonoTorrent.Client
         {
             StreamReader reader = new StreamReader(stream);
             
-            string result = null;
+            string result;
             Regex r = new Regex(@"([0-9]{1,3}\.){3,3}[0-9]{1,3}");
 
             while ((result = reader.ReadLine()) != null)

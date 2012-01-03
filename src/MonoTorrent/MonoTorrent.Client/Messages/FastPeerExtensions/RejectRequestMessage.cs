@@ -26,11 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
-using System;
 using System.Text;
-using System.Net;
 using MonoTorrent.Client.Messages.Standard;
 
 namespace MonoTorrent.Client.Messages.FastPeer
@@ -46,7 +42,7 @@ namespace MonoTorrent.Client.Messages.FastPeer
         /// </summary>
         public int StartOffset
         {
-            get { return this.startOffset; }
+            get { return startOffset; }
         }
         private int startOffset;
 
@@ -55,7 +51,7 @@ namespace MonoTorrent.Client.Messages.FastPeer
         /// </summary>
         public int PieceIndex
         {
-            get { return this.pieceIndex; }
+            get { return pieceIndex; }
         }
         private int pieceIndex;
 
@@ -64,7 +60,7 @@ namespace MonoTorrent.Client.Messages.FastPeer
         /// </summary>
         public int RequestLength
         {
-            get { return this.requestLength; }
+            get { return requestLength; }
         }
         private int requestLength;
         #endregion
@@ -101,13 +97,13 @@ namespace MonoTorrent.Client.Messages.FastPeer
             if (!ClientEngine.SupportsFastPeer)
                 throw new ProtocolException("Message encoding not supported");
 
-			int written = offset;
+            int written = offset;
 
-			written += Write(buffer, written, messageLength);
-			written += Write(buffer, written, MessageId);
-			written += Write(buffer, written, pieceIndex);
-			written += Write(buffer, written, startOffset);
-			written += Write(buffer, written, requestLength);
+            written += Write(buffer, written, messageLength);
+            written += Write(buffer, written, MessageId);
+            written += Write(buffer, written, pieceIndex);
+            written += Write(buffer, written, startOffset);
+            written += Write(buffer, written, requestLength);
 
             return CheckWritten(written - offset);
         }
@@ -118,14 +114,14 @@ namespace MonoTorrent.Client.Messages.FastPeer
             if (!ClientEngine.SupportsFastPeer)
                 throw new ProtocolException("Message decoding not supported");
 
-            this.pieceIndex = ReadInt(buffer, ref offset);
-            this.startOffset = ReadInt(buffer, ref offset);
-            this.requestLength = ReadInt(buffer, ref offset);
+            pieceIndex = ReadInt(buffer, ref offset);
+            startOffset = ReadInt(buffer, ref offset);
+            requestLength = ReadInt(buffer, ref offset);
         }
 
         public override int ByteLength
         {
-            get { return this.messageLength + 4; }
+            get { return messageLength + 4; }
         }
         #endregion
 
@@ -137,17 +133,17 @@ namespace MonoTorrent.Client.Messages.FastPeer
             if (msg == null)
                 return false;
 
-            return (this.pieceIndex == msg.pieceIndex
-                && this.startOffset == msg.startOffset
-                && this.requestLength == msg.requestLength);
+            return (pieceIndex == msg.pieceIndex
+                && startOffset == msg.startOffset
+                && requestLength == msg.requestLength);
         }
 
 
         public override int GetHashCode()
         {
-            return (this.pieceIndex.GetHashCode()
-                    ^ this.requestLength.GetHashCode()
-                    ^ this.startOffset.GetHashCode());
+            return (pieceIndex.GetHashCode()
+                    ^ requestLength.GetHashCode()
+                    ^ startOffset.GetHashCode());
         }
 
 
@@ -156,11 +152,11 @@ namespace MonoTorrent.Client.Messages.FastPeer
             StringBuilder sb = new StringBuilder(24);
             sb.Append("Reject Request");
             sb.Append(" Index: ");
-            sb.Append(this.pieceIndex);
+            sb.Append(pieceIndex);
             sb.Append(" Offset: ");
-            sb.Append(this.startOffset);
+            sb.Append(startOffset);
             sb.Append(" Length " );
-            sb.Append(this.requestLength);
+            sb.Append(requestLength);
             return sb.ToString();
         }
         #endregion

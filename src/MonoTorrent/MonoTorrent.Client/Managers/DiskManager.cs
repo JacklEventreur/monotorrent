@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Security.Cryptography;
 using System.IO;
 using MonoTorrent.Common;
-using MonoTorrent.Client.Messages.Standard;
 using MonoTorrent.Client.PieceWriters;
 
 namespace MonoTorrent.Client
@@ -44,7 +42,7 @@ namespace MonoTorrent.Client
 
         public int QueuedWrites
         {
-            get { return this.bufferedWrites.Count; }
+            get { return bufferedWrites.Count; }
         }
 
         public int ReadRate
@@ -94,11 +92,11 @@ namespace MonoTorrent.Client
                 if (disposed)
                     return;
 
-                while (this.bufferedWrites.Count > 0 && writeLimiter.TryProcess(bufferedWrites.Peek ().buffer.Length / 2048))
+                while (bufferedWrites.Count > 0 && writeLimiter.TryProcess(bufferedWrites.Peek ().buffer.Length / 2048))
                 {
                     BufferedIO write;
                     lock (bufferLock)
-                        write = this.bufferedWrites.Dequeue();
+                        write = bufferedWrites.Dequeue();
                     try
                     {
                         PerformWrite(write);
@@ -111,11 +109,11 @@ namespace MonoTorrent.Client
                     }
                 }
 
-                while (this.bufferedReads.Count > 0 && readLimiter.TryProcess(bufferedReads.Peek().Count / 2048))
+                while (bufferedReads.Count > 0 && readLimiter.TryProcess(bufferedReads.Peek().Count / 2048))
                 {
                     BufferedIO read;
                     lock(bufferLock)
-                        read = this.bufferedReads.Dequeue();
+                        read = bufferedReads.Dequeue();
 
                     try
                     {
@@ -151,20 +149,20 @@ namespace MonoTorrent.Client
             ManualResetEvent handle = new ManualResetEvent(false);
 
             IOLoop.Queue(delegate {
-				// Process all pending reads/writes then close any open streams
-				try
-				{
-					LoopTask();
-					writer.Close(manager.Torrent.Files);
-				}
+                // Process all pending reads/writes then close any open streams
+                try
+                {
+                    LoopTask();
+                    writer.Close(manager.Torrent.Files);
+                }
                 catch (Exception ex)
                 {
                     SetError (manager, Reason.WriteFailure, ex);
                 }
-				finally
-				{
-					handle.Set();
-				}
+                finally
+                {
+                    handle.Set();
+                }
             });
 
             return handle;
@@ -249,21 +247,21 @@ namespace MonoTorrent.Client
             QueueRead(io, callback);
         }
 
-		void QueueRead(BufferedIO io, DiskIOCallback callback)
-		{
-			io.Callback = callback;
-			if (Thread.CurrentThread == IOLoop.thread) {
-				PerformRead(io);
-				cache.Enqueue (io);
-			}
-			else
-				lock (bufferLock)
-				{
-					bufferedReads.Enqueue(io);
+        void QueueRead(BufferedIO io, DiskIOCallback callback)
+        {
+            io.Callback = callback;
+            if (Thread.CurrentThread == IOLoop.thread) {
+                PerformRead(io);
+                cache.Enqueue (io);
+            }
+            else
+                lock (bufferLock)
+                {
+                    bufferedReads.Enqueue(io);
                     if (bufferedReads.Count == 1)
-                        DiskManager.IOLoop.Queue(LoopTask);
-				}
-		}
+                        IOLoop.Queue(LoopTask);
+                }
+        }
 
         internal void QueueWrite(TorrentManager manager, long offset, byte[] buffer, int count, DiskIOCallback callback)
         {
@@ -272,21 +270,21 @@ namespace MonoTorrent.Client
             QueueWrite(io, callback);
         }
 
-		void QueueWrite(BufferedIO io, DiskIOCallback callback)
-		{
-			io.Callback = callback;
-			if (Thread.CurrentThread == IOLoop.thread) {
-				PerformWrite(io);
-				cache.Enqueue (io);
-			}
-			else
-				lock (bufferLock)
-				{
-					bufferedWrites.Enqueue(io);
+        void QueueWrite(BufferedIO io, DiskIOCallback callback)
+        {
+            io.Callback = callback;
+            if (Thread.CurrentThread == IOLoop.thread) {
+                PerformWrite(io);
+                cache.Enqueue (io);
+            }
+            else
+                lock (bufferLock)
+                {
+                    bufferedWrites.Enqueue(io);
                     if (bufferedWrites.Count == 1)
-                        DiskManager.IOLoop.Queue(LoopTask);
-				}
-		}
+                        IOLoop.Queue(LoopTask);
+                }
+        }
 
         internal bool CheckAnyFilesExist(TorrentManager manager)
         {

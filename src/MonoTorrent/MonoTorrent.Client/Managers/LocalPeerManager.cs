@@ -27,14 +27,9 @@
 //
 
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Timers;
-using MonoTorrent;
-using MonoTorrent.Common;
-using MonoTorrent.Client;
 
 namespace MonoTorrent.Client
 {
@@ -58,14 +53,14 @@ namespace MonoTorrent.Client
             
             string message = String.Format("BT-SEARCH * HTTP/1.1\r\nHost: 239.192.152.143:6771\r\nPort: {0}\r\nInfohash: {1}\r\n\r\n\r\n", manager.Engine.Settings.ListenPort, manager.InfoHash.ToHex());
             byte[] data = Encoding.ASCII.GetBytes(message);
-			try
-			{
-				socket.Send(data, data.Length, ep);
-			}
-			catch
-			{
-				// If data can't be sent, just ignore the error
-			}
+            try
+            {
+                socket.Send(data, data.Length, ep);
+            }
+            catch
+            {
+                // If data can't be sent, just ignore the error
+            }
         }
 
         public void Dispose()

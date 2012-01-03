@@ -26,10 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
-using System;
-using System.Text;
 using MonoTorrent.Common;
 using MonoTorrent.Client.Messages;
 
@@ -47,7 +43,7 @@ namespace MonoTorrent.Client
         /// </summary>
         public PeerMessage Message
         {
-            get { return this.message; }
+            get { return message; }
         }
         private PeerMessage message;
 
@@ -56,13 +52,13 @@ namespace MonoTorrent.Client
         /// </summary>
         public Direction Direction
         {
-            get { return this.direction; }
+            get { return direction; }
         }
         private Direction direction;
 
         public PeerId ID
         {
-            get { return this.id; }
+            get { return id; }
         }
         private PeerId id;
 
@@ -76,14 +72,12 @@ namespace MonoTorrent.Client
         /// </summary>
         /// <param name="message">The peer message involved</param>
         /// <param name="direction">The direction of the message</param>
-        internal PeerMessageEventArgs(TorrentManager manager, PeerMessage message, Direction direction, PeerId id)
-            :base(manager)
+        internal PeerMessageEventArgs(TorrentManager manager, PeerMessage message, Direction direction, PeerId id) : base(manager)
         {
             this.direction = direction;
             this.id = id;
             this.message = message;
         }
-
         #endregion
     }
 }

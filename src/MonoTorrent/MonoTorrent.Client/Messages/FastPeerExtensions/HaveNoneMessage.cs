@@ -27,11 +27,6 @@
 //
 
 
-
-using System;
-using System.Text;
-using System.Net;
-
 namespace MonoTorrent.Client.Messages.FastPeer
 {
     public class HaveNoneMessage : PeerMessage, IFastPeerMessage
@@ -52,10 +47,10 @@ namespace MonoTorrent.Client.Messages.FastPeer
             if (!ClientEngine.SupportsFastPeer)
                 throw new ProtocolException("Message encoding not supported");
 
-			int written = offset;
+            int written = offset;
 
-			written += Write(buffer, written, messageLength);
-			written += Write(buffer, written, MessageId);
+            written += Write(buffer, written, messageLength);
+            written += Write(buffer, written, MessageId);
 
             return CheckWritten(written - offset);
         }
@@ -68,7 +63,7 @@ namespace MonoTorrent.Client.Messages.FastPeer
 
         public override int ByteLength
         {
-            get { return this.messageLength + 4; }
+            get { return messageLength + 4; }
         }
         #endregion
 
@@ -81,7 +76,7 @@ namespace MonoTorrent.Client.Messages.FastPeer
 
         public override int GetHashCode()
         {
-            return this.ToString().GetHashCode();
+            return ToString().GetHashCode();
         }
 
         public override string ToString()

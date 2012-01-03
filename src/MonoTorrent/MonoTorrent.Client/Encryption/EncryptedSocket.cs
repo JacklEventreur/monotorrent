@@ -31,11 +31,6 @@
 using System;
 using System.Text;
 using System.Security.Cryptography;
-using System.IO;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading;
-using MonoTorrent.Client.Encryption;
 using MonoTorrent.Common;
 using MonoTorrent.Client.Connections;
 using MonoTorrent.Client.Messages;
@@ -50,14 +45,12 @@ namespace MonoTorrent.Client.Encryption
 
         }
 
-        public EncryptionException(string message)
-            : base(message)
+        public EncryptionException(string message) : base(message)
         {
 
         }
 
-        public EncryptionException(string message, Exception innerException)
-            : base(message, innerException)
+        public EncryptionException(string message, Exception innerException) : base(message, innerException)
         {
 
         }
@@ -88,8 +81,8 @@ namespace MonoTorrent.Client.Encryption
         private SHA1 hasher;
 
         // Cryptors for the handshaking
-        private RC4 encryptor = null;
-        private RC4 decryptor = null;
+        private RC4 encryptor;
+        private RC4 decryptor;
 
         // Cryptors for the data transmission
         private IEncryption streamEncryptor;
@@ -99,7 +92,7 @@ namespace MonoTorrent.Client.Encryption
 
         private byte[] X; // A 160 bit random integer
         private byte[] Y; // 2^X mod P
-        private byte[] OtherY = null;
+        private byte[] OtherY;
         
         private IConnection socket;
 
@@ -119,17 +112,17 @@ namespace MonoTorrent.Client.Encryption
         private AsyncIOCallback fillSynchronizeBytesCallback;
 
         // State information for synchronization
-        private byte[] synchronizeData = null;
-        private byte[] synchronizeWindow = null;
+        private byte[] synchronizeData;
+        private byte[] synchronizeWindow;
         private int syncStopPoint;
         #endregion
 
         #region Protected members
-        protected byte[] S = null;
-        protected InfoHash SKEY = null;
+        protected byte[] S;
+        protected InfoHash SKEY;
 
-        protected byte[] PadC = null;
-        protected byte[] PadD = null;
+        protected byte[] PadC;
+        protected byte[] PadD;
 
         protected byte[] VerificationConstant = new byte[8];
 

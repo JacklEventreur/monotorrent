@@ -27,13 +27,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
-using System.IO;
-using System.Security.Cryptography;
 using System.Collections.Generic;
-
-using MonoTorrent.BEncoding;
 using MonoTorrent.Client;
 
 namespace MonoTorrent

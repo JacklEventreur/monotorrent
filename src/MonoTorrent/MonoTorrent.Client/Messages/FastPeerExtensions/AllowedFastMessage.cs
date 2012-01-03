@@ -27,11 +27,7 @@
 //
 
 
-
-using System;
 using System.Text;
-using System.Net;
-using MonoTorrent.Client.Encryption;
 
 namespace MonoTorrent.Client.Messages.FastPeer
 {
@@ -43,7 +39,7 @@ namespace MonoTorrent.Client.Messages.FastPeer
         #region Member Variables
         public int PieceIndex
         {
-            get { return this.pieceIndex; }
+            get { return pieceIndex; }
         }
         private int pieceIndex;
         #endregion
@@ -67,11 +63,11 @@ namespace MonoTorrent.Client.Messages.FastPeer
             if (!ClientEngine.SupportsFastPeer)
                 throw new ProtocolException("Message encoding not supported");
 
-			int written = offset;
+            int written = offset;
 
-			written += Write(buffer, written, messageLength);
-			written += Write(buffer, written, MessageId);
-			written += Write(buffer, written, pieceIndex);
+            written += Write(buffer, written, messageLength);
+            written += Write(buffer, written, MessageId);
+            written += Write(buffer, written, pieceIndex);
 
             return CheckWritten(written - offset);
         }
@@ -81,12 +77,12 @@ namespace MonoTorrent.Client.Messages.FastPeer
             if (!ClientEngine.SupportsFastPeer)
                 throw new ProtocolException("Message decoding not supported");
 
-            this.pieceIndex = ReadInt(buffer, offset);
+            pieceIndex = ReadInt(buffer, offset);
         }
 
         public override int ByteLength
         {
-            get { return this.messageLength + 4; }
+            get { return messageLength + 4; }
         }
         #endregion
 
@@ -98,13 +94,13 @@ namespace MonoTorrent.Client.Messages.FastPeer
             if (msg == null)
                 return false;
 
-            return this.pieceIndex == msg.pieceIndex;
+            return pieceIndex == msg.pieceIndex;
         }
 
 
         public override int GetHashCode()
         {
-            return this.pieceIndex.GetHashCode();
+            return pieceIndex.GetHashCode();
         }
 
 
@@ -113,7 +109,7 @@ namespace MonoTorrent.Client.Messages.FastPeer
             StringBuilder sb = new StringBuilder(24);
             sb.Append("AllowedFast");
             sb.Append(" Index: ");
-            sb.Append(this.pieceIndex);
+            sb.Append(pieceIndex);
             return sb.ToString();
         }
         #endregion

@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-
 using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
@@ -17,7 +14,7 @@ namespace MonoTorrent.Client
         /// </summary>
         public Peer Peer
         {
-            get { return this.peer; }
+            get { return peer; }
         }
 
         /// <summary>
@@ -25,7 +22,7 @@ namespace MonoTorrent.Client
         /// </summary>
         public Direction ConnectionDirection
         {
-            get { return this.connectionDirection; }
+            get { return connectionDirection; }
         }
 
         /// <summary>

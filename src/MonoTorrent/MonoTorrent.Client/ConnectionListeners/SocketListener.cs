@@ -45,10 +45,9 @@ namespace MonoTorrent.Client
         private AsyncCallback endAcceptCallback;
         private Socket listener;
 
-        public SocketListener(IPEndPoint endpoint)
-            : base(endpoint)
+        public SocketListener(IPEndPoint endpoint) : base(endpoint)
         {
-            this.endAcceptCallback = EndAccept;
+            endAcceptCallback = EndAccept;
         }
 
         private void EndAccept(IAsyncResult result)
@@ -60,7 +59,7 @@ namespace MonoTorrent.Client
                 peerSocket = listener.EndAccept(result);
 
                 IPEndPoint endpoint = (IPEndPoint)peerSocket.RemoteEndPoint;
-                Uri uri = new Uri("tcp://" + endpoint.Address.ToString() + ':' + endpoint.Port);
+                Uri uri = new Uri("tcp://" + endpoint.Address + ':' + endpoint.Port);
                 Peer peer = new Peer("", uri, EncryptionTypes.All);
                 IConnection connection = null;
                 if (peerSocket.AddressFamily == AddressFamily.InterNetwork)

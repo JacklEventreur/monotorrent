@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
@@ -38,8 +36,7 @@ namespace MonoTorrent.Client
             get { return TorrentState.Error; }
         }
 
-        public ErrorMode(TorrentManager manager)
-            : base(manager)
+        public ErrorMode(TorrentManager manager) : base(manager)
         {
             CanAcceptConnections = false;
             CloseConnections();

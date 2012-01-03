@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.BEncoding;
 
 namespace MonoTorrent.Client.Messages.Libtorrent
@@ -80,7 +78,7 @@ namespace MonoTorrent.Client.Messages.Libtorrent
             int written = offset;
 
             written += Write(buffer, offset, ByteLength - 4);
-            written += Write(buffer, written, ExtensionMessage.MessageId);
+            written += Write(buffer, written, MessageId);
             written += Write(buffer, written, ExtensionId);
             written += peerDict.Encode(buffer, written);
 

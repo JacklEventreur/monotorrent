@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
@@ -8,10 +5,10 @@ namespace MonoTorrent.Client
     class DownloadMode : Mode
     {
         TorrentState state;
-		public override TorrentState State
-		{
-			get { return state; }
-		}
+        public override TorrentState State
+        {
+            get { return state; }
+        }
 
         public DownloadMode(TorrentManager manager)
             : base(manager)
@@ -19,7 +16,7 @@ namespace MonoTorrent.Client
             state = manager.Complete ? TorrentState.Seeding : TorrentState.Downloading;
         }
 
-        public override void HandlePeerConnected(PeerId id, MonoTorrent.Common.Direction direction)
+        public override void HandlePeerConnected(PeerId id, Direction direction)
         {
             if (!ShouldConnect(id))
                 id.CloseConnection();

@@ -28,7 +28,7 @@
 
 
 using System;
-using System.Text;
+using System.Runtime.Serialization;
 using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
@@ -42,7 +42,6 @@ namespace MonoTorrent.Client
         /// 
         /// </summary>
         public ConnectionException()
-            : base()
         {
         }
 
@@ -51,8 +50,7 @@ namespace MonoTorrent.Client
         /// 
         /// </summary>
         /// <param name="message"></param>
-        public ConnectionException(string message)
-            : base(message)
+        public ConnectionException(string message) : base(message)
         {
         }
 
@@ -62,8 +60,7 @@ namespace MonoTorrent.Client
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
-        public ConnectionException(string message, Exception innerException)
-            : base(message, innerException)
+        public ConnectionException(string message, Exception innerException) : base(message, innerException)
         {
         }
 
@@ -73,8 +70,7 @@ namespace MonoTorrent.Client
         /// </summary>
         /// <param name="info"></param>
         /// <param name="context"></param>
-        public ConnectionException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
-            : base(info, context)
+        public ConnectionException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

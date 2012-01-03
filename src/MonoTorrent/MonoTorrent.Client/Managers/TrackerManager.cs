@@ -28,16 +28,11 @@
 
 
 using System;
-using System.Text;
 using System.Net;
-using System.IO;
 using MonoTorrent.Common;
 using System.Collections.ObjectModel;
 using System.Threading;
-using System.Web;
-using System.Diagnostics;
 using System.Collections.Generic;
-using MonoTorrent.BEncoding;
 using MonoTorrent.Client.Encryption;
 using System.Collections;
 
@@ -60,10 +55,10 @@ namespace MonoTorrent.Client.Tracker
         {
             get
             {
-                if (this.trackerTiers.Count == 0 || this.trackerTiers[0].Trackers.Count == 0)
+                if (trackerTiers.Count == 0 || trackerTiers[0].Trackers.Count == 0)
                     return null;
 
-                return this.trackerTiers[0].Trackers[0];
+                return trackerTiers[0].Trackers[0];
             }
         }
 
@@ -79,7 +74,7 @@ namespace MonoTorrent.Client.Tracker
         /// </summary>
         public bool UpdateSucceeded
         {
-            get { return this.updateSucceeded; }
+            get { return updateSucceeded; }
         }
         private bool updateSucceeded;
 
@@ -89,7 +84,7 @@ namespace MonoTorrent.Client.Tracker
         /// </summary>
         public DateTime LastUpdated
         {
-            get { return this.lastUpdated; }
+            get { return lastUpdated; }
         }
         private DateTime lastUpdated;
 
@@ -182,8 +177,8 @@ namespace MonoTorrent.Client.Tracker
                 return waitHandle;
             }
 
-            this.updateSucceeded = true;
-            this.lastUpdated = DateTime.Now;
+            updateSucceeded = true;
+            lastUpdated = DateTime.Now;
 
             EncryptionTypes e = engine.Settings.AllowedEncryption;
             bool requireEncryption = !Toolbox.HasEncryption(e, EncryptionTypes.PlainText);
@@ -200,11 +195,11 @@ namespace MonoTorrent.Client.Tracker
             // tracker optimisations might result in no peers being sent back.
             long bytesLeft = 1000;
             if (manager.HasMetadata)
-                bytesLeft = (long)((1 - this.manager.Bitfield.PercentComplete / 100.0) * this.manager.Torrent.Size);
-            AnnounceParameters p = new AnnounceParameters(this.manager.Monitor.DataBytesDownloaded,
-                                                this.manager.Monitor.DataBytesUploaded,
+                bytesLeft = (long)((1 - manager.Bitfield.PercentComplete / 100.0) * manager.Torrent.Size);
+            AnnounceParameters p = new AnnounceParameters(manager.Monitor.DataBytesDownloaded,
+                                                manager.Monitor.DataBytesUploaded,
                                                 bytesLeft,
-                                                clientEvent, this.infoHash, requireEncryption, manager.Engine.PeerId,
+                                                clientEvent, infoHash, requireEncryption, manager.Engine.PeerId,
                                                 ip, port);
             p.SupportsEncryption = supportsEncryption;
             TrackerConnectionID id = new TrackerConnectionID(tracker, trySubsequent, clientEvent, waitHandle);
@@ -214,29 +209,29 @@ namespace MonoTorrent.Client.Tracker
 
         private bool GetNextTracker(Tracker tracker, out TrackerTier trackerTier, out Tracker trackerReturn)
         {
-            for (int i = 0; i < this.trackerTiers.Count; i++)
+            for (int i = 0; i < trackerTiers.Count; i++)
             {
-                for (int j = 0; j < this.trackerTiers[i].Trackers.Count; j++)
+                for (int j = 0; j < trackerTiers[i].Trackers.Count; j++)
                 {
-                    if (this.trackerTiers[i].Trackers[j] != tracker)
+                    if (trackerTiers[i].Trackers[j] != tracker)
                         continue;
 
                     // If we are on the last tracker of this tier, check to see if there are more tiers
-                    if (j == (this.trackerTiers[i].Trackers.Count - 1))
+                    if (j == (trackerTiers[i].Trackers.Count - 1))
                     {
-                        if (i == (this.trackerTiers.Count - 1))
+                        if (i == (trackerTiers.Count - 1))
                         {
                             trackerTier = null;
                             trackerReturn = null;
                             return false;
                         }
 
-                        trackerTier = this.trackerTiers[i + 1];
+                        trackerTier = trackerTiers[i + 1];
                         trackerReturn = trackerTier.Trackers[0];
                         return true;
                     }
 
-                    trackerTier = this.trackerTiers[i];
+                    trackerTier = trackerTiers[i];
                     trackerReturn = trackerTier.Trackers[j + 1];
                     return true;
                 }
@@ -254,7 +249,7 @@ namespace MonoTorrent.Client.Tracker
 
         private void OnAnnounceComplete(object sender, AnnounceResponseEventArgs e)
         {
-            this.updateSucceeded = e.Successful;
+            updateSucceeded = e.Successful;
             if (manager.Engine == null)
             {
                 e.Id.WaitHandle.Set();
@@ -263,7 +258,7 @@ namespace MonoTorrent.Client.Tracker
 
             if (e.Successful)
             {
-		manager.Peers.BusyPeers.Clear ();
+        manager.Peers.BusyPeers.Clear ();
                 int count = manager.AddPeersCore(e.Peers);
                 manager.RaisePeersFound(new TrackerPeersAdded(manager, count, e.Peers.Count, e.Tracker));
 
@@ -312,7 +307,7 @@ namespace MonoTorrent.Client.Tracker
                 throw new TorrentException("This tracker does not support scraping");
 
             TrackerConnectionID id = new TrackerConnectionID(tracker, trySubsequent, TorrentEvent.None, new ManualResetEvent(false));
-            tracker.Scrape(new ScrapeParameters(this.infoHash), id);
+            tracker.Scrape(new ScrapeParameters(infoHash), id);
             return id.WaitHandle;
         }
 

@@ -26,11 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
-using System;
-using System.Net;
-using MonoTorrent.Client.Messages.FastPeer;
+using System.Text;
 
 namespace MonoTorrent.Client.Messages.Standard
 {
@@ -58,17 +54,17 @@ namespace MonoTorrent.Client.Messages.Standard
 
         public int StartOffset
         {
-            get { return this.startOffset; }
+            get { return startOffset; }
         }
 
         public int PieceIndex
         {
-            get { return this.pieceIndex; }
+            get { return pieceIndex; }
         }
 
         public int RequestLength
         {
-            get { return this.requestLength; }
+            get { return requestLength; }
         }
 
         #endregion
@@ -101,13 +97,13 @@ namespace MonoTorrent.Client.Messages.Standard
 
         public override int Encode(byte[] buffer, int offset)
         {
-			int written = offset;
-			
-			written += Write(buffer, written, messageLength);
-			written += Write(buffer, written, MessageId);
-			written += Write(buffer, written, pieceIndex);
-			written += Write(buffer, written, startOffset);
-			written += Write(buffer, written, requestLength);
+            int written = offset;
+            
+            written += Write(buffer, written, messageLength);
+            written += Write(buffer, written, MessageId);
+            written += Write(buffer, written, pieceIndex);
+            written += Write(buffer, written, startOffset);
+            written += Write(buffer, written, requestLength);
 
             return CheckWritten(written - offset);
         }
@@ -115,27 +111,27 @@ namespace MonoTorrent.Client.Messages.Standard
         public override bool Equals(object obj)
         {
             RequestMessage msg = obj as RequestMessage;
-            return (msg == null) ? false : (this.pieceIndex == msg.pieceIndex
-                                            && this.startOffset == msg.startOffset
-                                            && this.requestLength == msg.requestLength);
+            return (msg != null) && (pieceIndex == msg.pieceIndex
+                                      && startOffset == msg.startOffset
+                                      && requestLength == msg.requestLength);
         }
 
         public override int GetHashCode()
         {
-            return (this.pieceIndex.GetHashCode() ^ this.requestLength.GetHashCode() ^ this.startOffset.GetHashCode());
+            return (pieceIndex.GetHashCode() ^ requestLength.GetHashCode() ^ startOffset.GetHashCode());
         }
 
         public override string ToString()
         {
 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.Append("RequestMessage ");
             sb.Append(" Index ");
-            sb.Append(this.pieceIndex);
+            sb.Append(pieceIndex);
             sb.Append(" Offset ");
-            sb.Append(this.startOffset);
+            sb.Append(startOffset);
             sb.Append(" Length ");
-            sb.Append(this.requestLength);
+            sb.Append(requestLength);
             return sb.ToString();
         }
 

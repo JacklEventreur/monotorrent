@@ -27,11 +27,7 @@
 //
 
 
-
-using System;
 using System.Collections.Generic;
-using System.Text;
-using MonoTorrent.Client.Messages;
 
 namespace MonoTorrent.Client.Messages.UdpTracker
 {
@@ -49,14 +45,12 @@ namespace MonoTorrent.Client.Messages.UdpTracker
             get { return scrapes; }
         }
 
-        public ScrapeResponseMessage()
-            : this(0, new List<ScrapeDetails>())
+        public ScrapeResponseMessage() : this(0, new List<ScrapeDetails>())
         {
 
         }
 
-        public ScrapeResponseMessage(int transactionId, List<ScrapeDetails> scrapes)
-            :base(2, transactionId)
+        public ScrapeResponseMessage(int transactionId, List<ScrapeDetails> scrapes) : base(2, transactionId)
         {
             this.scrapes = scrapes;
         }

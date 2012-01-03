@@ -28,15 +28,10 @@
 
 using System;
 using System.IO;
-using System.Threading;
 using System.Security.Cryptography;
-using System.Collections.Generic;
-
 using MonoTorrent.Common;
 using MonoTorrent.Client.Messages.Libtorrent;
 using MonoTorrent.BEncoding;
-using MonoTorrent.Client.Tracker;
-using MonoTorrent.Client.Encryption;
 using MonoTorrent.Client.Messages;
 
 
@@ -51,19 +46,19 @@ namespace MonoTorrent.Client
         string savePath;
         private DateTime requestTimeout;
 
-		public override bool CanHashCheck
-		{
-			get { return true; }
-		}
-		
-		public override TorrentState State
-		{
-			get { return TorrentState.Metadata; }
-		}
+        public override bool CanHashCheck
+        {
+            get { return true; }
+        }
+        
+        public override TorrentState State
+        {
+            get { return TorrentState.Metadata; }
+        }
 
         internal MemoryStream Stream
         {
-            get { return this.stream; }
+            get { return stream; }
         }
 
         public MetadataMode(TorrentManager manager, string savePath)
@@ -169,9 +164,9 @@ namespace MonoTorrent.Client
                                 }
                                 catch (Exception ex)
                                 {
-									Logger.Log(null, "*METADATA EXCEPTION* - Can not write in {0} : {1}", savePath, ex);
-									Manager.Error = new Error (Reason.WriteFailure, ex);
-									Manager.Mode = new ErrorMode(Manager);
+                                    Logger.Log(null, "*METADATA EXCEPTION* - Can not write in {0} : {1}", savePath, ex);
+                                    Manager.Error = new Error (Reason.WriteFailure, ex);
+                                    Manager.Mode = new ErrorMode(Manager);
                                     return;
                                 }
                                 t.TorrentPath = savePath;
@@ -184,7 +179,7 @@ namespace MonoTorrent.Client
                             }
                         }
                     }
-					//Double test because we can change the bitfield in the other block
+                    //Double test because we can change the bitfield in the other block
                     if (!bitField.AllTrue)
                     {
                         RequestNextNeededPiece(id);
@@ -216,22 +211,22 @@ namespace MonoTorrent.Client
             Manager.Start();
         }
 
-        protected override void HandleHaveAllMessage(PeerId id, MonoTorrent.Client.Messages.FastPeer.HaveAllMessage message)
+        protected override void HandleHaveAllMessage(PeerId id, Messages.FastPeer.HaveAllMessage message)
         {
             // Nothing
         }
 
-        protected override void HandleHaveMessage(PeerId id, MonoTorrent.Client.Messages.Standard.HaveMessage message)
+        protected override void HandleHaveMessage(PeerId id, Messages.Standard.HaveMessage message)
         {
             // Nothing
         }
 
-        protected override void HandleHaveNoneMessage(PeerId id, MonoTorrent.Client.Messages.FastPeer.HaveNoneMessage message)
+        protected override void HandleHaveNoneMessage(PeerId id, Messages.FastPeer.HaveNoneMessage message)
         {
             // Nothing
         }
 
-        protected override void HandleInterestedMessage(PeerId id, MonoTorrent.Client.Messages.Standard.InterestedMessage message)
+        protected override void HandleInterestedMessage(PeerId id, Messages.Standard.InterestedMessage message)
         {
             // Nothing
         }

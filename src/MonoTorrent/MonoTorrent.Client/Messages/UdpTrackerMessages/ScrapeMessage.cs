@@ -27,11 +27,7 @@
 //
 
 
-
-using System;
 using System.Collections.Generic;
-using System.Text;
-using MonoTorrent.Client.Messages;
 
 namespace MonoTorrent.Client.Messages.UdpTracker
 {
@@ -50,14 +46,12 @@ namespace MonoTorrent.Client.Messages.UdpTracker
             get { return infohashes; }
         }
 
-        public ScrapeMessage()
-            : this(0, 0, new List<byte[]>())
+        public ScrapeMessage() : this(0, 0, new List<byte[]>())
         {
 
         }
 
-        public ScrapeMessage(int transactionId, long connectionId, List<byte[]> infohashes)
-            : base (2, transactionId)
+        public ScrapeMessage(int transactionId, long connectionId, List<byte[]> infohashes) : base (2, transactionId)
         {
             this.connectionId = connectionId;
             this.infohashes = infohashes;

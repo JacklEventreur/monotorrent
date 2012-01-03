@@ -27,10 +27,7 @@
 //
 
 
-
-using System;
-using System.Net;
-using MonoTorrent.Client.Messages;
+using System.Text;
 
 namespace MonoTorrent.Client.Messages.Standard
 {
@@ -49,7 +46,7 @@ namespace MonoTorrent.Client.Messages.Standard
         /// </summary>
         public int PieceIndex
         {
-            get { return this.pieceIndex; }
+            get { return pieceIndex; }
         }
         private int pieceIndex;
 
@@ -59,7 +56,7 @@ namespace MonoTorrent.Client.Messages.Standard
         /// </summary>
         public int StartOffset
         {
-            get { return this.startOffset; }
+            get { return startOffset; }
         }
         private int startOffset;
 
@@ -69,7 +66,7 @@ namespace MonoTorrent.Client.Messages.Standard
         /// </summary>
         public int RequestLength
         {
-            get { return this.requestLength; }
+            get { return requestLength; }
         }
         private int requestLength;
         #endregion
@@ -102,7 +99,7 @@ namespace MonoTorrent.Client.Messages.Standard
         #region Methods
         public override int Encode(byte[] buffer, int offset)
         {
-			int written = offset;
+            int written = offset;
 
             written += Write(buffer, written, messageLength);
             written += Write(buffer, written, MessageId);
@@ -137,14 +134,14 @@ namespace MonoTorrent.Client.Messages.Standard
         /// <returns></returns>
         public override string ToString()
         {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.Append("CancelMessage ");
             sb.Append(" Index ");
-            sb.Append(this.pieceIndex);
+            sb.Append(pieceIndex);
             sb.Append(" Offset ");
-            sb.Append(this.startOffset);
+            sb.Append(startOffset);
             sb.Append(" Length ");
-            sb.Append(this.requestLength);
+            sb.Append(requestLength);
             return sb.ToString();
         }
 
@@ -155,16 +152,16 @@ namespace MonoTorrent.Client.Messages.Standard
             if (msg == null)
                 return false;
 
-            return (this.pieceIndex == msg.pieceIndex
-                    && this.startOffset == msg.startOffset
-                    && this.requestLength == msg.requestLength);
+            return (pieceIndex == msg.pieceIndex
+                    && startOffset == msg.startOffset
+                    && requestLength == msg.requestLength);
         }
 
         public override int GetHashCode()
         {
-            return (this.pieceIndex.GetHashCode()
-                ^ this.requestLength.GetHashCode()
-                ^ this.startOffset.GetHashCode());
+            return (pieceIndex.GetHashCode()
+                ^ requestLength.GetHashCode()
+                ^ startOffset.GetHashCode());
         }
         #endregion
     }

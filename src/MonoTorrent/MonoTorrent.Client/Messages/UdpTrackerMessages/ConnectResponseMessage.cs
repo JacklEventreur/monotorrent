@@ -27,12 +27,6 @@
 //
 
 
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net;
-using MonoTorrent.Client.Messages;
 namespace MonoTorrent.Client.Messages.UdpTracker
 {
     class ConnectResponseMessage : UdpTrackerMessage
@@ -44,14 +38,12 @@ namespace MonoTorrent.Client.Messages.UdpTracker
             get { return connectionId; }
         }
 
-        public ConnectResponseMessage()
-            : this(0, 0)
+        public ConnectResponseMessage() : this(0, 0)
         {
 
         }
 
-        public ConnectResponseMessage(int transactionId, long connectionId)
-            : base(0, transactionId)
+        public ConnectResponseMessage(int transactionId, long connectionId) : base(0, transactionId)
         {
             this.connectionId = connectionId;
         }

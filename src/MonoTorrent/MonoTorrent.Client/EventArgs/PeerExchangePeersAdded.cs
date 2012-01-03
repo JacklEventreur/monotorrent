@@ -27,8 +27,6 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MonoTorrent.Client
 {
@@ -41,8 +39,7 @@ namespace MonoTorrent.Client
             get{return id;}
         }
 
-        public PeerExchangePeersAdded(TorrentManager manager, int count, int total, PeerId id)
-            :base(manager, count, total)
+        public PeerExchangePeersAdded(TorrentManager manager, int count, int total, PeerId id) : base(manager, count, total)
         {
             if (id == null)
                 throw new ArgumentNullException("id");

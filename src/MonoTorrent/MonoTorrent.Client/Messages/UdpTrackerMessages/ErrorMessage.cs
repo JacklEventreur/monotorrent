@@ -27,11 +27,7 @@
 //
 
 
-
-using System;
-using System.Collections.Generic;
 using System.Text;
-using MonoTorrent.Client.Messages;
 
 namespace MonoTorrent.Client.Messages.UdpTracker
 {
@@ -39,15 +35,13 @@ namespace MonoTorrent.Client.Messages.UdpTracker
     {
         string errorMessage;
 
-        public ErrorMessage()
-            :this(0, "")
+        public ErrorMessage() : this(0, "")
         {
         }
 
-        public ErrorMessage(int transactionId, string error)
-            :base(3, transactionId)
+        public ErrorMessage(int transactionId, string error) : base(3, transactionId)
         {
-            this.errorMessage = error;
+            errorMessage = error;
         }
 
         public string Error

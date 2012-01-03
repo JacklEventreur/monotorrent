@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using MonoTorrent.Client;
 using MonoTorrent.Common;
 using System.IO;
 using MonoTorrent.BEncoding;
@@ -10,10 +7,10 @@ namespace MonoTorrent.Client
 {
     public class FastResume
     {
-        private static readonly BEncodedString VersionKey = (BEncodedString)"version";
-        private static readonly BEncodedString InfoHashKey = (BEncodedString)"infohash";
-        private static readonly BEncodedString BitfieldKey = (BEncodedString)"bitfield";
-        private static readonly BEncodedString BitfieldLengthKey = (BEncodedString)"bitfield_length";
+        private static readonly BEncodedString VersionKey = "version";
+        private static readonly BEncodedString InfoHashKey = "infohash";
+        private static readonly BEncodedString BitfieldKey = "bitfield";
+        private static readonly BEncodedString BitfieldLengthKey = "bitfield_length";
 
         private BitField bitfield;
         private InfoHash infoHash;
@@ -45,7 +42,7 @@ namespace MonoTorrent.Client
 
         public FastResume(BEncodedDictionary dict)
         {
-            CheckContent(dict, VersionKey, (BEncodedNumber)1);
+            CheckContent(dict, VersionKey, 1);
             CheckContent(dict, InfoHashKey);
             CheckContent(dict, BitfieldKey);
             CheckContent(dict, BitfieldLengthKey);

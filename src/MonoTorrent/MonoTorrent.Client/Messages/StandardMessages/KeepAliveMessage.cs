@@ -27,9 +27,6 @@
 //
 */
 
-
-using System;
-
 namespace MonoTorrent.Client.Messages.Standard
 {
     /// <summary>
@@ -39,7 +36,7 @@ namespace MonoTorrent.Client.Messages.Standard
     {
         private const int messageLength = 0;   // has no payload
         internal static readonly byte MessageId = 0;
-		private static readonly byte[] payload = new byte[] { 0, 0, 0, 0 };
+        private static readonly byte[] payload = new byte[] { 0, 0, 0, 0 };
 
         #region Constructors
         /// <summary>
@@ -54,7 +51,7 @@ namespace MonoTorrent.Client.Messages.Standard
         #region Methods
         public override int Encode(byte[] buffer, int offset)
         {
-			int written = offset;
+            int written = offset;
 
             written += Write(buffer, written, payload);
 
@@ -94,7 +91,7 @@ namespace MonoTorrent.Client.Messages.Standard
 
         public override int GetHashCode()
         {
-            return this.ToString().GetHashCode();
+            return ToString().GetHashCode();
         }
         #endregion
     }

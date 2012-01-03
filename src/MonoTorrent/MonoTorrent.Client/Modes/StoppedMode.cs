@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
@@ -17,13 +14,12 @@ namespace MonoTorrent.Client
 			get { return TorrentState.Stopped; }
 		}
 
-		public StoppedMode(TorrentManager manager)
-			: base(manager)
+		public StoppedMode(TorrentManager manager) : base(manager)
 		{
 			CanAcceptConnections = false;
 		}
 
-		public override void HandlePeerConnected(PeerId id, MonoTorrent.Common.Direction direction)
+		public override void HandlePeerConnected(PeerId id, Direction direction)
 		{
 			id.CloseConnection();
 		}

@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MonoTorrent.Common;
+﻿using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
 {
     class PausedMode : Mode
     {
-		public override TorrentState State
-		{
-			get { return TorrentState.Paused; }
-		}
+        public override TorrentState State
+        {
+            get { return TorrentState.Paused; }
+        }
 
-        public PausedMode(TorrentManager manager)
-            : base(manager)
+        public PausedMode(TorrentManager manager) : base(manager)
         {
             // When in the Paused mode, a special RateLimiter will
             // activate and disable transfers. PauseMode itself

@@ -29,9 +29,6 @@
 
 using System;
 using System.Text;
-using System.Net.Sockets;
-using MonoTorrent.Common;
-using MonoTorrent.Client.Connections;
 using MonoTorrent.Client.Messages;
 
 namespace MonoTorrent.Client.Encryption
@@ -49,8 +46,8 @@ namespace MonoTorrent.Client.Encryption
         public PeerAEncryption(InfoHash InfoHash, EncryptionTypes allowedEncryption)
             : base(allowedEncryption)
         {
-            gotVerificationCallback = new AsyncCallback(gotVerification);
-            gotPadDCallback = new AsyncCallback(gotPadD);
+            gotVerificationCallback = gotVerification;
+            gotPadDCallback = gotPadD;
 
             SKEY = InfoHash;
         }

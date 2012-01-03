@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Client.Connections;
 
 namespace MonoTorrent.Client
@@ -19,8 +17,7 @@ namespace MonoTorrent.Client
             get { return peer; }
         }
 
-        public NewConnectionEventArgs(Peer peer, IConnection connection, TorrentManager manager)
-            : base(manager)
+        public NewConnectionEventArgs(Peer peer, IConnection connection, TorrentManager manager) : base(manager)
         {
             if (!connection.IsIncoming && manager == null)
                 throw new InvalidOperationException("An outgoing connection must specify the torrent manager it belongs to");

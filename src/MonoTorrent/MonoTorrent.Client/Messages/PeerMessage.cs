@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Net;
 using MonoTorrent.Client.Messages.FastPeer;
 using MonoTorrent.Client.Messages.Standard;
@@ -37,7 +36,7 @@ namespace MonoTorrent.Client.Messages
             
             // We register this solely so that the user cannot register their own message with this ID.
             // Actual decoding is handled with manual detection
-            Register(ExtensionMessage.MessageId, delegate(TorrentManager manager) { throw new MessageException("Shouldn't decode extension message this way"); });
+            Register(ExtensionMessage.MessageId, delegate { throw new MessageException("Shouldn't decode extension message this way"); });
         }
 
         private static void Register(byte identifier, CreateMessage creator)

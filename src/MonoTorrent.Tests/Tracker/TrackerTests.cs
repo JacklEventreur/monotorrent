@@ -18,8 +18,8 @@ namespace MonoTorrent.Tracker
         //    t.FixtureTeardown();
         //}
         Uri uri = new Uri("http://127.0.0.1:23456/");
-        MonoTorrent.Tracker.Listeners.HttpListener listener;
-        MonoTorrent.Tracker.Tracker server;
+        Listeners.HttpListener listener;
+        Tracker server;
         //MonoTorrent.Client.Tracker.HTTPTracker tracker;
         [TestFixtureSetUp]
         public void FixtureSetup()

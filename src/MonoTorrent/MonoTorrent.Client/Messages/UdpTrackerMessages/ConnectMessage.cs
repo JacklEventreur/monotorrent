@@ -29,10 +29,7 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Net;
-using MonoTorrent.Client.Messages;
 
 namespace MonoTorrent.Client.Messages.UdpTracker
 {
@@ -45,8 +42,7 @@ namespace MonoTorrent.Client.Messages.UdpTracker
             get { return connectionId; }
         }
 
-        public ConnectMessage()
-            : base(0, DateTime.Now.GetHashCode())
+        public ConnectMessage() : base(0, DateTime.Now.GetHashCode())
         {
             connectionId = IPAddress.NetworkToHostOrder(0x41727101980); // Init connectionId as per spec
         }
