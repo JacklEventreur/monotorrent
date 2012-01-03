@@ -1,4 +1,4 @@
-//
+﻿//
 // BEncodingTest.cs
 //
 // Authors:
@@ -48,28 +48,10 @@ namespace MonoTorrent.Common
         [Test]
         public void UTF8Test()
         {
-            string s = "�";
+            string s = "ã";
             BEncodedString str = s;
             Assert.AreEqual(s, str.Text);
         }
-
-        //[Test]
-        //public void EncodingUTF32()
-        //{
-        //    UTF8Encoding enc8 = new UTF8Encoding();
-        //    UTF32Encoding enc32 = new UTF32Encoding();
-        //    BEncodedDictionary val = new BEncodedDictionary();
-
-        //    val.Add("Test", (BEncodedNumber)1532);
-        //    val.Add("yeah", (BEncodedString)"whoop");
-        //    val.Add("mylist", new BEncodedList());
-        //    val.Add("mydict", new BEncodedDictionary());
-
-        //    byte[] utf8Result = val.Encode();
-        //    byte[] utf32Result = val.Encode(enc32);
-
-        //    Assert.AreEqual(enc8.GetString(utf8Result), enc32.GetString(utf32Result));
-        //}
         #endregion
 
 
