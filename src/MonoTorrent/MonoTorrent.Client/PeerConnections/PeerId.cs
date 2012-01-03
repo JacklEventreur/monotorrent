@@ -26,17 +26,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
-
-using System.Net.Sockets;
 using System;
 using MonoTorrent.Common;
 using System.Diagnostics;
 using MonoTorrent.Client.Connections;
 using MonoTorrent.Client.Messages;
 using MonoTorrent.Client.Encryption;
-using MonoTorrent.Client.Messages.Libtorrent;
 using System.Collections.Generic;
 using MonoTorrent.Client.Messages.Standard;
 namespace MonoTorrent.Client
@@ -47,20 +42,20 @@ namespace MonoTorrent.Client
         
         internal DateTime? LastUnchoked
         {
-            get { return this.lastUnchoked; }
-            set { this.lastUnchoked = value; }
+            get { return lastUnchoked; }
+            set { lastUnchoked = value; }
         }
 
         internal long BytesDownloadedAtLastReview
         {
-            get { return this.bytesDownloadedAtLastReview; }
-            set { this.bytesDownloadedAtLastReview = value; }
+            get { return bytesDownloadedAtLastReview; }
+            set { bytesDownloadedAtLastReview = value; }
         }
 
         internal long BytesUploadedAtLastReview
         {
-            get { return this.bytesUploadedAtLastReview; }
-            set { this.bytesUploadedAtLastReview = value; }
+            get { return bytesUploadedAtLastReview; }
+            set { bytesUploadedAtLastReview = value; }
         }
 
         public IConnection Connection {
@@ -70,36 +65,36 @@ namespace MonoTorrent.Client
 
         internal double LastReviewDownloadRate
         {
-            get { return this.lastReviewDownloadRate; }
-            set { this.lastReviewDownloadRate = value; }
+            get { return lastReviewDownloadRate; }
+            set { lastReviewDownloadRate = value; }
         }
 
         internal double LastReviewUploadRate
         {
-            get { return this.lastReviewUploadRate; }
-            set { this.lastReviewUploadRate = value; }
+            get { return lastReviewUploadRate; }
+            set { lastReviewUploadRate = value; }
         }
 
-		internal bool FirstReviewPeriod
-		{
-			get { return this.firstReviewPeriod; }
-			set { this.firstReviewPeriod = value; }
-		}
+        internal bool FirstReviewPeriod
+        {
+            get { return firstReviewPeriod; }
+            set { firstReviewPeriod = value; }
+        }
 
-		internal DateTime LastBlockReceived
-		{
-			get { return this.lastBlockReceived; }
-			set { this.lastBlockReceived = value; }
-		}
+        internal DateTime LastBlockReceived
+        {
+            get { return lastBlockReceived; }
+            set { lastBlockReceived = value; }
+        }
 
-        private DateTime? lastUnchoked = null;        //When this peer was last unchoked, or null if we haven't unchoked it yet
-        private long bytesDownloadedAtLastReview = 0; //Number of bytes downloaded when this peer was last reviewed - allows us to determine number of bytes
+        private DateTime? lastUnchoked;               //When this peer was last unchoked, or null if we haven't unchoked it yet
+        private long bytesDownloadedAtLastReview;     //Number of bytes downloaded when this peer was last reviewed - allows us to determine number of bytes
         //downloaded during a review period
-        private long bytesUploadedAtLastReview = 0;   //Ditto for uploaded bytes
-        private double lastReviewDownloadRate = 0;    //Download rate determined at the end of the last full review period when this peer was unchoked
-        private double lastReviewUploadRate = 0;      //Ditto for upload rate
+        private long bytesUploadedAtLastReview;       //Ditto for uploaded bytes
+        private double lastReviewDownloadRate;        //Download rate determined at the end of the last full review period when this peer was unchoked
+        private double lastReviewUploadRate;          //Ditto for upload rate
         private bool firstReviewPeriod;               //Set true if this is the first review period since this peer was last unchoked
-		private DateTime lastBlockReceived = DateTime.Now;
+        private DateTime lastBlockReceived = DateTime.Now;
 
         #endregion
 
@@ -125,7 +120,7 @@ namespace MonoTorrent.Client
         private int isRequestingPiecesCount;
         private DateTime lastMessageReceived;
         private DateTime lastMessageSent;
-		private DateTime whenConnected;
+        private DateTime whenConnected;
         private ExtensionSupports extensionSupports;
         private int maxPendingRequests;
         private int maxSupportedPendingRequests;
@@ -158,72 +153,72 @@ namespace MonoTorrent.Client
         /// </summary>
         internal MonoTorrentCollection<int> AmAllowedFastPieces
         {
-            get { return this.amAllowedFastPieces; }
-            set { this.amAllowedFastPieces = value; }
+            get { return amAllowedFastPieces; }
+            set { amAllowedFastPieces = value; }
         }
 
         public bool AmChoking
         {
-            get { return this.amChoking; }
-            internal set { this.amChoking = value; }
+            get { return amChoking; }
+            internal set { amChoking = value; }
         }
 
         public bool AmInterested
         {
-            get { return this.amInterested; }
-            internal set { this.amInterested = value; }
+            get { return amInterested; }
+            internal set { amInterested = value; }
         }
 
         public int AmRequestingPiecesCount
         {
-            get { return this.amRequestingPiecesCount; }
-            set { this.amRequestingPiecesCount = value; }
+            get { return amRequestingPiecesCount; }
+            set { amRequestingPiecesCount = value; }
         }
 
         public BitField BitField
         {
-            get { return this.bitField; }
-            set { this.bitField = value; }
+            get { return bitField; }
+            set { bitField = value; }
         }
 
         public Software ClientApp
         {
-            get { return this.clientApp; }
-            internal set { this.clientApp = value; }
+            get { return clientApp; }
+            internal set { clientApp = value; }
         }
 
         internal ConnectionManager ConnectionManager
         {
-            get { return this.engine.ConnectionManager; }
+            get { return engine.ConnectionManager; }
         }
 
         internal PeerMessage CurrentlySendingMessage
         {
-            get { return this.currentlySendingMessage; }
-            set { this.currentlySendingMessage = value; }
+            get { return currentlySendingMessage; }
+            set { currentlySendingMessage = value; }
         }
 
         internal IEncryption Decryptor
         {
-            get { return this.decryptor; }
-            set { this.decryptor = value; }
+            get { return decryptor; }
+            set { decryptor = value; }
         }
 
         internal string DisconnectReason
         {
-            get { return this.disconnectReason; }
-            set { this.disconnectReason = value; }
+            get { return disconnectReason; }
+            set { disconnectReason = value; }
         }
 
         public IEncryption Encryptor
         {
-            get { return this.encryptor; }
-            set { this.encryptor = value; }
+            get { return encryptor; }
+            set { encryptor = value; }
         }
 
         public ClientEngine Engine
         {
-            get { return this.engine; ; }
+            get { return engine; ; }
         }
 
         internal ExtensionSupports ExtensionSupports
@@ -239,14 +234,14 @@ namespace MonoTorrent.Client
         
         internal MonoTorrentCollection<int> IsAllowedFastPieces
         {
-            get { return this.isAllowedFastPieces; }
-            set { this.isAllowedFastPieces = value; }
+            get { return isAllowedFastPieces; }
+            set { isAllowedFastPieces = value; }
         }
 
         public bool IsChoking
         {
-            get { return this.isChoking; }
-            internal set { this.isChoking = value; }
+            get { return isChoking; }
+            internal set { isChoking = value; }
         }
 
         public bool IsConnected
@@ -256,8 +251,8 @@ namespace MonoTorrent.Client
         
         public bool IsInterested
         {
-            get { return this.isInterested; }
-            internal set { this.isInterested = value; }
+            get { return isInterested; }
+            internal set { isInterested = value; }
         }
 
         public bool IsSeeder
@@ -267,27 +262,27 @@ namespace MonoTorrent.Client
         
         public int IsRequestingPiecesCount
         {
-            get { return this.isRequestingPiecesCount; }
-            set { this.isRequestingPiecesCount = value; }
+            get { return isRequestingPiecesCount; }
+            set { isRequestingPiecesCount = value; }
         }
 
         internal DateTime LastMessageReceived
         {
-            get { return this.lastMessageReceived; }
-            set { this.lastMessageReceived = value; }
+            get { return lastMessageReceived; }
+            set { lastMessageReceived = value; }
         }
 
-		internal DateTime LastMessageSent
-		{
-			get { return this.lastMessageSent; }
-			set { this.lastMessageSent = value; }
-		}
+        internal DateTime LastMessageSent
+        {
+            get { return lastMessageSent; }
+            set { lastMessageSent = value; }
+        }
 
-		internal DateTime WhenConnected
-		{
-			get { return this.whenConnected; }
-			set { this.whenConnected = value; }
-		}
+        internal DateTime WhenConnected
+        {
+            get { return whenConnected; }
+            set { whenConnected = value; }
+        }
 
         internal int MaxPendingRequests
         {
@@ -303,31 +298,31 @@ namespace MonoTorrent.Client
 
         internal MessagingCallback MessageSentCallback
         {
-            get { return this.messageSentCallback; }
-            set { this.messageSentCallback = value; }
+            get { return messageSentCallback; }
+            set { messageSentCallback = value; }
         }
 
         internal MessagingCallback MessageReceivedCallback
         {
-            get { return this.messageReceivedCallback; }
-            set { this.messageReceivedCallback = value; }
+            get { return messageReceivedCallback; }
+            set { messageReceivedCallback = value; }
         }
 
         public ConnectionMonitor Monitor
         {
-            get { return this.monitor; }
+            get { return monitor; }
         }
 
         internal Peer Peer
         {
-            get { return this.peer; }
-            set { this.peer = value; }
+            get { return peer; }
+            set { peer = value; }
         }
 
         internal PeerExchangeManager PeerExchangeManager
         {
-            get { return this.pexManager; }
-            set { this.pexManager = value; }
+            get { return pexManager; }
+            set { pexManager = value; }
         }
 
         public string PeerID
@@ -337,8 +332,8 @@ namespace MonoTorrent.Client
         
         public int PiecesSent
         {
-            get { return this.piecesSent; }
-            internal set { this.piecesSent = value; }
+            get { return piecesSent; }
+            internal set { piecesSent = value; }
         }
 
         public int PiecesReceived
@@ -349,42 +344,42 @@ namespace MonoTorrent.Client
 
         internal ushort Port
         {
-            get { return this.port; }
-            set { this.port = value; }
+            get { return port; }
+            set { port = value; }
         }
 
         internal bool ProcessingQueue
         {
-            get { return this.processingQueue; }
-            set { this.processingQueue = value; }
+            get { return processingQueue; }
+            set { processingQueue = value; }
         }
 
         public bool SupportsFastPeer
         {
-            get { return this.supportsFastPeer; }
-            internal set { this.supportsFastPeer = value; }
+            get { return supportsFastPeer; }
+            internal set { supportsFastPeer = value; }
         }
 
         public bool SupportsLTMessages
         {
-            get { return this.supportsLTMessages; }
-            internal set { this.supportsLTMessages = value; }
+            get { return supportsLTMessages; }
+            internal set { supportsLTMessages = value; }
         }
 
         internal MonoTorrentCollection<int> SuggestedPieces
         {
-            get { return this.suggestedPieces; }
+            get { return suggestedPieces; }
         }
 
         public TorrentManager TorrentManager
         {
-            get { return this.torrentManager; }
+            get { return torrentManager; }
             set
             {
-                this.torrentManager = value;
+                torrentManager = value;
                 if (value != null)
                 {
-                    this.engine = value.Engine;
+                    engine = value.Engine;
                     if(value.HasMetadata)
                         BitField = new BitField(value.Torrent.Pieces.Count);
                 }
@@ -405,14 +400,14 @@ namespace MonoTorrent.Client
             if (peer == null)
                 throw new ArgumentNullException("peer");
 
-            this.suggestedPieces = new MonoTorrentCollection<int>();
-            this.amChoking = true;
-            this.isChoking = true;
+            suggestedPieces = new MonoTorrentCollection<int>();
+            amChoking = true;
+            isChoking = true;
 
-            this.isAllowedFastPieces = new MonoTorrentCollection<int>();
-            this.amAllowedFastPieces = new MonoTorrentCollection<int>();
-            this.lastMessageReceived = DateTime.Now;
-            this.lastMessageSent = DateTime.Now;
+            isAllowedFastPieces = new MonoTorrentCollection<int>();
+            amAllowedFastPieces = new MonoTorrentCollection<int>();
+            lastMessageReceived = DateTime.Now;
+            lastMessageSent = DateTime.Now;
             this.peer = peer;
             this.maxPendingRequests = 2;
             this.maxSupportedPendingRequests = 50;

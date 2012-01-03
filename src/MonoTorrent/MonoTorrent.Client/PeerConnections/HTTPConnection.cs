@@ -28,20 +28,13 @@
 
 
 using System;
-using System.Text;
-using System.Net.Sockets;
 using System.Net;
-using System.Threading;
 using System.Collections.Generic;
 using System.IO;
-
-using MonoTorrent.Client.Encryption;
 using MonoTorrent.Client.Messages;
 using MonoTorrent.Client.Messages.Standard;
 using MonoTorrent.Common;
-using System.Text.RegularExpressions;
 using System.Reflection;
-using MonoTorrent.BEncoding;
 
 namespace MonoTorrent.Client.Connections
 {
@@ -56,8 +49,7 @@ namespace MonoTorrent.Client.Connections
             public int Count;
             public int BytesTransferred;
 
-            public HttpResult(AsyncCallback callback, object state, byte[] buffer, int offset, int count)
-                : base(callback, state)
+            public HttpResult(AsyncCallback callback, object state, byte[] buffer, int offset, int count) : base(callback, state)
             {
                 Buffer = buffer;
                 Offset = offset;
@@ -66,10 +58,10 @@ namespace MonoTorrent.Client.Connections
 
             public void Complete(int bytes)
             {
-                this.BytesTransferred = bytes;
-                base.Complete();
+                BytesTransferred = bytes;
+                Complete();
             }
-		}
+        }
 
         #region Member Variables
 
