@@ -30,14 +30,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using MonoTorrent;
 using MonoTorrent.Common;
-using MonoTorrent.Client;
 using MonoTorrent.Client.Messages;
-using MonoTorrent.Client.Messages.Standard;
-using MonoTorrent.Client.Messages.FastPeer;
-using System.Diagnostics;
 
 namespace MonoTorrent.Client
 {
@@ -66,11 +60,11 @@ namespace MonoTorrent.Client
         /// </summary>
         public int HighPrioritySetStart
         {
-            get { return this.highPrioritySetStart; }
+            get { return highPrioritySetStart; }
             set
             {
-                if (this.highPrioritySetStart < value)
-                    this.highPrioritySetStart = value;
+                if (highPrioritySetStart < value)
+                    highPrioritySetStart = value;
             }
         }
 
@@ -79,8 +73,8 @@ namespace MonoTorrent.Client
         /// </summary>
         public int HighPrioritySetSize
         {
-            get { return this.highPrioritySetSize; }
-            set { this.highPrioritySetSize = value; }
+            get { return highPrioritySetSize; }
+            set { highPrioritySetSize = value; }
         }
 
         public int MediumPrioritySetStart
@@ -103,7 +97,7 @@ namespace MonoTorrent.Client
         /// </summary>
         public int MediumPrioritySetSize
         {
-            get { return this.highPrioritySetSize * ratio; }
+            get { return highPrioritySetSize * ratio; }
         }
 
         #endregion Member Variables
@@ -144,7 +138,7 @@ namespace MonoTorrent.Client
             : base(picker)
         {
             this.highPrioritySetSize = highPrioritySetSize;
-            this.ratio = mediumToHighRatio;
+            ratio = mediumToHighRatio;
         }
 
 
@@ -163,7 +157,7 @@ namespace MonoTorrent.Client
             foreach (TorrentFile file in files)
             {
                 if (file.Priority == Priority.DoNotDownload)
-                    this.highPrioritySetStart = file.EndPieceIndex;
+                    highPrioritySetStart = file.EndPieceIndex;
                 else
                     break;
             }

@@ -26,9 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
-
 using System;
 using MonoTorrent.Client.Messages.Standard;
 
@@ -56,12 +53,12 @@ namespace MonoTorrent.Client
 
         public int PieceIndex
         {
-            get { return this.piece.Index; }
+            get { return piece.Index; }
         }
 
         public bool Received
         {
-            get { return this.received; }
+            get { return received; }
             internal set
             {
                 if (value && !received)
@@ -70,13 +67,13 @@ namespace MonoTorrent.Client
                 else if (!value && received)
                     piece.TotalReceived--;
 
-                this.received = value;
+                received = value;
             }
         }
 
         public bool Requested
         {
-            get { return this.requested; }
+            get { return requested; }
             internal set
             {
                 if (value && !requested)
@@ -85,13 +82,13 @@ namespace MonoTorrent.Client
                 else if (!value && requested)
                     piece.TotalRequested--;
 
-                this.requested = value;
+                requested = value;
             }
         }
 
         public int RequestLength
         {
-            get { return this.requestLength; }
+            get { return requestLength; }
         }
 
         public bool RequestTimedOut
@@ -105,18 +102,18 @@ namespace MonoTorrent.Client
 
         internal PeerId RequestedOff
         {
-            get { return this.requestedOff; }
-            set { this.requestedOff = value; }
+            get { return requestedOff; }
+            set { requestedOff = value; }
         }
 
         public int StartOffset
         {
-            get { return this.startOffset; }
+            get { return startOffset; }
         }
 
         public bool Written
         {
-            get { return this.written; }
+            get { return written; }
             internal set
             {
                 if (value && !written)
@@ -125,7 +122,7 @@ namespace MonoTorrent.Client
                 else if (!value && written)
                     piece.TotalWritten--;
 
-                this.written = value;
+                written = value;
             }
         }
 
@@ -155,7 +152,7 @@ namespace MonoTorrent.Client
             Requested = true;
             RequestedOff = id;
             RequestedOff.AmRequestingPiecesCount++;
-            return new RequestMessage(PieceIndex, this.startOffset, this.requestLength);
+            return new RequestMessage(PieceIndex, startOffset, requestLength);
         }
 
         internal void CancelRequest()
@@ -171,12 +168,12 @@ namespace MonoTorrent.Client
                 return false;
 
             Block other = (Block)obj;
-            return this.PieceIndex == other.PieceIndex && this.startOffset == other.startOffset && this.requestLength == other.requestLength;
+            return PieceIndex == other.PieceIndex && startOffset == other.startOffset && requestLength == other.requestLength;
         }
 
         public override int GetHashCode()
         {
-            return this.PieceIndex ^ this.requestLength ^ this.startOffset;
+            return PieceIndex ^ requestLength ^ startOffset;
         }
 
         internal static int IndexOf(Block[] blocks, int startOffset, int blockLength)

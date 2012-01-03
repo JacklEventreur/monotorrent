@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using Microsoft.Win32.SafeHandles;
-using System.Threading;
 using System.Runtime.InteropServices;
 
 namespace MonoTorrent.Client
@@ -45,10 +43,10 @@ namespace MonoTorrent.Client
                 // Create a file with the sparse flag enabled
 
                 uint bytesReturned = 0;
-                uint access = (uint)0x40000000;         // GenericWrite
-                uint sharing = 0;                       // none
-                uint attributes = (uint)0x00000080;     // Normal
-                uint creation = (uint)1;                // Only create if new
+                uint access = 0x40000000;         // GenericWrite
+                uint sharing = 0;                 // none
+                uint attributes = 0x00000080;     // Normal
+                uint creation = 1;                // Only create if new
 
                 using (SafeFileHandle handle = CreateFileW(filename, access, sharing, IntPtr.Zero, creation, attributes, IntPtr.Zero))
                 {

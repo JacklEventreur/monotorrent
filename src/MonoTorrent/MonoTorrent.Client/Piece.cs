@@ -28,7 +28,6 @@
 
 
 using System;
-using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
 {
@@ -51,60 +50,60 @@ namespace MonoTorrent.Client
 
         public Block this[int index]
         {
-            get { return this.blocks[index]; }
+            get { return blocks[index]; }
         }
 
         internal Block[] Blocks
         {
-            get { return this.blocks; }
+            get { return blocks; }
         }
 
         public bool AllBlocksRequested
         {
-            get { return this.totalRequested == BlockCount; }
+            get { return totalRequested == BlockCount; }
         }
 
         public bool AllBlocksReceived
         {
-            get { return this.totalReceived == BlockCount; }
+            get { return totalReceived == BlockCount; }
         }
         
         public bool AllBlocksWritten
         {
-            get { return this.totalWritten == BlockCount; }
+            get { return totalWritten == BlockCount; }
         }
 
         public int BlockCount
         {
-            get { return this.blocks.Length; }
+            get { return blocks.Length; }
         }
 
         public int Index
         {
-            get { return this.index; }
+            get { return index; }
         }
 
         public bool NoBlocksRequested
         {
-            get { return this.totalRequested == 0; }
+            get { return totalRequested == 0; }
         }
 
         public int TotalReceived
         {
-            get { return this.totalReceived; }
-            internal set { this.totalReceived = value; }
+            get { return totalReceived; }
+            internal set { totalReceived = value; }
         }
 
         public int TotalRequested
         {
-            get { return this.totalRequested; }
-            internal set { this.totalRequested = value; }
+            get { return totalRequested; }
+            internal set { totalRequested = value; }
         }
 
         public int TotalWritten
         {
             get { return totalWritten; }
-            internal set { this.totalWritten = value; }
+            internal set { totalWritten = value; }
         }
 
         #endregion Fields
@@ -114,7 +113,7 @@ namespace MonoTorrent.Client
 
         internal Piece(int pieceIndex, int pieceLength, long torrentSize)
         {
-            this.index = pieceIndex;
+            index = pieceIndex;
 
             // Request last piece. Special logic needed
             if ((torrentSize - (long)pieceIndex *pieceLength) < pieceLength)      
@@ -167,17 +166,17 @@ namespace MonoTorrent.Client
         public override bool Equals(object obj)
         {
             Piece p = obj as Piece;
-            return (p == null) ? false : this.index.Equals(p.index);
+            return (p != null) && index.Equals(p.index);
         }
 
         public System.Collections.IEnumerator GetEnumerator()
         {
-            return this.blocks.GetEnumerator();
+            return blocks.GetEnumerator();
         }
 
         public override int GetHashCode()
         {
-            return this.index;
+            return index;
         }
 
         #endregion

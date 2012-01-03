@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Common;
 using System.IO;
-using System.Threading;
 
 namespace MonoTorrent.Client.PieceWriters
 {
@@ -16,15 +13,14 @@ namespace MonoTorrent.Client.PieceWriters
             get { return streamsBuffer.Count; }
         }
 
-        public DiskWriter()
-            : this(10)
+        public DiskWriter() : this(10)
         {
 
         }
 
         public DiskWriter(int maxOpenFiles)
         {
-            this.streamsBuffer = new FileStreamBuffer(maxOpenFiles);
+            streamsBuffer = new FileStreamBuffer(maxOpenFiles);
         }
 
         public override void Close(TorrentFile file)

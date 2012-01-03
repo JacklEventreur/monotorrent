@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Collections;
-using MonoTorrent.Common;
 
 namespace MonoTorrent.Client.Tracker
 {
@@ -21,19 +19,19 @@ namespace MonoTorrent.Client.Tracker
 
         internal bool SendingStartedEvent
         {
-            get { return this.sendingStartedEvent; }
-            set { this.sendingStartedEvent = value; }
+            get { return sendingStartedEvent; }
+            set { sendingStartedEvent = value; }
         }
 
         internal bool SentStartedEvent
         {
-            get { return this.sentStartedEvent; }
-            set { this.sentStartedEvent = value; }
+            get { return sentStartedEvent; }
+            set { sentStartedEvent = value; }
         }
 
         internal List<Tracker> Trackers
         {
-            get { return this.trackers; }
+            get { return trackers; }
         }
 
         #endregion Properties
@@ -66,7 +64,7 @@ namespace MonoTorrent.Client.Tracker
                 }
             }
 
-            this.trackers = trackerList;
+            trackers = trackerList;
         }
 
         #endregion Constructors

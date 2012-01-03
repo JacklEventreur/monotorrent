@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
@@ -12,7 +9,7 @@ namespace MonoTorrent.Client
     {
         internal byte[] buffer;
         private int actualCount;
-		private DiskIOCallback callback;
+        private DiskIOCallback callback;
         private int count;
         private long offset;
         private int pieceLength;
@@ -28,18 +25,18 @@ namespace MonoTorrent.Client
         }
         public int BlockIndex
         {
-            get { return PieceOffset / MonoTorrent.Client.Piece.BlockSize; }
+            get { return PieceOffset / Piece.BlockSize; }
         }
         public byte[] Buffer
         {
             get { return buffer; }
         }
 
-		internal DiskIOCallback Callback
-		{
-			get { return callback; }
-			set { callback = value; }
-		}
+        internal DiskIOCallback Callback
+        {
+            get { return callback; }
+            set { callback = value; }
+        }
 
         public int Count
         {
@@ -75,7 +72,7 @@ namespace MonoTorrent.Client
 
         internal TorrentManager Manager
         {
-            get { return this.manager; }
+            get { return manager; }
         }
 
         public bool Complete

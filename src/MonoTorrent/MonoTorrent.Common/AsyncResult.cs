@@ -27,8 +27,6 @@
 //
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
 namespace MonoTorrent.Common
@@ -83,8 +81,8 @@ namespace MonoTorrent.Common
 
         protected internal Exception SavedException
         {
-            get { return this.savedException; }
-            set { this.savedException = value; }
+            get { return savedException; }
+            set { savedException = value; }
         }
 
         #endregion Properties
@@ -100,6 +98,7 @@ namespace MonoTorrent.Common
         }
 
         #endregion Constructors
+
 
         #region Methods
 

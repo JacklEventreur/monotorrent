@@ -333,16 +333,16 @@ namespace MonoTorrent.Client.Tracker
                if (timeout <= 4)
                {
                    timeout++;
-				   try
-				   {
-					   tracker.Send(buffer, buffer.Length);
-				   }
-				   catch (Exception ex)
-				   {
-					   timeout = 0;
+                   try
+                   {
+                       tracker.Send(buffer, buffer.Length);
+                   }
+                   catch (Exception ex)
+                   {
+                       timeout = 0;
                        requestState.Complete(ex);
-					   return false;
-				   }
+                       return false;
+                   }
                }
                else
                {
@@ -382,8 +382,7 @@ namespace MonoTorrent.Client.Tracker
            public byte[] Data;
            public UdpTrackerMessage Message;
 
-           protected UdpTrackerAsyncState(AsyncCallback callback, object state)
-               : base(callback, state)
+           protected UdpTrackerAsyncState(AsyncCallback callback, object state) : base(callback, state)
            {
 
            }
@@ -393,8 +392,7 @@ namespace MonoTorrent.Client.Tracker
        {
            public AnnounceParameters Parameters;
 
-           public ConnectAnnounceState(AnnounceParameters parameters, AsyncCallback callback, object state)
-               : base (callback, state)
+           public ConnectAnnounceState(AnnounceParameters parameters, AsyncCallback callback, object state) : base (callback, state)
            {
                Parameters = parameters;
            }
@@ -404,8 +402,7 @@ namespace MonoTorrent.Client.Tracker
        {
            public ScrapeParameters Parameters;
 
-           public ConnectScrapeState(ScrapeParameters parameters, AsyncCallback callback, object state)
-               : base (callback, state)
+           public ConnectScrapeState(ScrapeParameters parameters, AsyncCallback callback, object state) : base (callback, state)
            {
                Parameters = parameters;
            }

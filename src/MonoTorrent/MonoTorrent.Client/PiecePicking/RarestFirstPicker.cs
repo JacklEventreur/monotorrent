@@ -27,9 +27,7 @@
 //
 
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Common;
 using MonoTorrent.Client.Messages;
 
@@ -46,8 +44,7 @@ namespace MonoTorrent.Client
             return spares.Count > 0 ? spares.Pop() : new BitField(length);
         }
 
-        public RarestFirstPicker(PiecePicker picker)
-            : base(picker)
+        public RarestFirstPicker(PiecePicker picker) : base(picker)
         {
             rarest = new Stack<BitField>();
             spares = new Stack<BitField>();
@@ -56,7 +53,7 @@ namespace MonoTorrent.Client
         public override void Initialise(BitField bitfield, TorrentFile[] files, IEnumerable<Piece> requests)
         {
             base.Initialise(bitfield, files, requests);
-            this.length = bitfield.Length;
+            length = bitfield.Length;
         }
 
         public override MessageBundle PickPiece(PeerId id, BitField peerBitfield, List<PeerId> otherPeers, int count, int startIndex, int endIndex)

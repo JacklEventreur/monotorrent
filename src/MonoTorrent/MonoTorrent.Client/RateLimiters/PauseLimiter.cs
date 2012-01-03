@@ -27,11 +27,6 @@
 //
 
 
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace MonoTorrent.Client
 {
     class PauseLimiter : IRateLimiter
@@ -40,7 +35,7 @@ namespace MonoTorrent.Client
 
         public bool Unlimited
         {
-            get { return manager.State != MonoTorrent.Common.TorrentState.Paused; }
+            get { return manager.State != Common.TorrentState.Paused; }
         }
 
         public PauseLimiter(TorrentManager manager)

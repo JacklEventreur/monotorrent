@@ -29,14 +29,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using Mono.Ssdp.Internal;
 using MonoTorrent.Common;
 
 namespace MonoTorrent.Client
 {
-	public delegate void MainLoopResult (object result);
+    public delegate void MainLoopResult (object result);
     public delegate object MainLoopJob();
     public delegate void MainLoopTask();
     public delegate bool TimeoutTask();

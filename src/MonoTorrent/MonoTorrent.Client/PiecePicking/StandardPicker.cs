@@ -29,11 +29,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Common;
 using MonoTorrent.Client.Messages;
 using MonoTorrent.Client.Messages.Standard;
-using MonoTorrent.Client.Messages.FastPeer;
 
 namespace MonoTorrent.Client
 {
@@ -241,7 +239,7 @@ namespace MonoTorrent.Client
 
             // Otherwise, if this peer has any of the pieces that are currently being requested, try to
             // request a block from one of those pieces
-            foreach (Piece p in this.requests)
+            foreach (Piece p in requests)
             {
                 // If the peer who this piece is assigned to is dodgy or if the blocks are all request or
                 // the peer doesn't have this piece, we don't want to help download the piece.
@@ -274,7 +272,7 @@ namespace MonoTorrent.Client
 
                 pieces.RemoveAt(i);
                 Piece p = new Piece(index, id.TorrentManager.Torrent.PieceLength, id.TorrentManager.Torrent.Size);
-                this.requests.Add(p);
+                requests.Add(p);
                 p.Blocks[0].Requested = true;
                 return p.Blocks[0].CreateRequest(id);
             }

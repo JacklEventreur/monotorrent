@@ -27,9 +27,6 @@
 //
 
 using System;
-using System.Net;
-using System.Threading;
-using MonoTorrent.Common;
 using System.Collections.Generic;
 
 namespace MonoTorrent.Client.Tracker
@@ -64,7 +61,7 @@ namespace MonoTorrent.Client.Tracker
 
             if (!trackerTypes.ContainsKey(uri.Scheme))
                 return null;
-			
+            
             try
             {
                 return (Tracker)Activator.CreateInstance(trackerTypes[uri.Scheme], uri);

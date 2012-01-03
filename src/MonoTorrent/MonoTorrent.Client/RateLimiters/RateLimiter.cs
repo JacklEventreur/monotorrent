@@ -26,10 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 
 namespace MonoTorrent.Client
@@ -60,17 +56,17 @@ namespace MonoTorrent.Client
             // for peer communications. For disk access and whatnot, a 5% overshoot is fine.
             maxRate = (int)(maxRate * 1.05);
             int errorRateDown = maxRate - actualRate;
-            int delta = (int)(0.4 * errorRateDown + 0.6 * this.savedError);
-            this.savedError = errorRateDown;
+            int delta = (int)(0.4 * errorRateDown + 0.6 * savedError);
+            savedError = errorRateDown;
 
 
             int increaseAmount = (int)((maxRate + delta) / ConnectionManager.ChunkLength);
-            Interlocked.Add(ref this.chunks, increaseAmount);
-            if (this.chunks > (maxRate * 1.2 / ConnectionManager.ChunkLength))
-                Interlocked.Exchange(ref this.chunks, (int)(maxRate * 1.2 / ConnectionManager.ChunkLength));
+            Interlocked.Add(ref chunks, increaseAmount);
+            if (chunks > (maxRate * 1.2 / ConnectionManager.ChunkLength))
+                Interlocked.Exchange(ref chunks, (int)(maxRate * 1.2 / ConnectionManager.ChunkLength));
 
-            if (this.chunks < (maxRate / ConnectionManager.ChunkLength / 2))
-                Interlocked.Exchange(ref this.chunks, (maxRate / ConnectionManager.ChunkLength / 2));
+            if (chunks < (maxRate / ConnectionManager.ChunkLength / 2))
+                Interlocked.Exchange(ref chunks, (maxRate / ConnectionManager.ChunkLength / 2));
 
             if (maxRate == 0)
                 chunks = 0;

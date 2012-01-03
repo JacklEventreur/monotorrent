@@ -26,15 +26,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
-using System.Net;
-
-using MonoTorrent.Client;
 using MonoTorrent.Client.Connections;
-using MonoTorrent.Client.Messages;
 using MonoTorrent.Common;
-using System.Threading;
-using MonoTorrent.Client.Encryption;
 
 namespace MonoTorrent.Client
 {

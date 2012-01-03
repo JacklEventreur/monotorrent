@@ -29,12 +29,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.BEncoding;
-using System.Threading;
 using System.Text.RegularExpressions;
 using System.Net;
-using System.Web;
 using MonoTorrent.Common;
 using System.IO;
 
@@ -70,7 +67,7 @@ namespace MonoTorrent.Client.Tracker
             {
                 CanScrape = true;
                 Regex r = new Regex("announce");
-                this.scrapeUrl = new Uri(r.Replace(announceUrl.OriginalString, "scrape", 1, index));
+                scrapeUrl = new Uri(r.Replace(announceUrl.OriginalString, "scrape", 1, index));
             }
 
             byte[] passwordKey = new byte[8];
@@ -85,8 +82,8 @@ namespace MonoTorrent.Client.Tracker
             {
                 Uri announceString = CreateAnnounceString(parameters);
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(announceString);
-                request.UserAgent = MonoTorrent.Common.VersionInfo.ClientVersion;
-                request.Proxy = new WebProxy();   // If i don't do this, i can't run the webrequest. It's wierd.
+                request.UserAgent = VersionInfo.ClientVersion;
+                request.Proxy = new WebProxy();   // If I don't do this, I can't run the webrequest. It's weird.
                 RaiseBeforeAnnounce();
                 BeginRequest(request, AnnounceReceived, new object[] { request, state });
             }
@@ -178,7 +175,7 @@ namespace MonoTorrent.Client.Tracker
 
         BEncodedDictionary DecodeResponse(WebRequest request, IAsyncResult result)
         {
-            int bytesRead = 0;
+            int bytesRead;
             int totalRead = 0;
             byte[] buffer = new byte[2048];
 
@@ -293,7 +290,7 @@ namespace MonoTorrent.Client.Tracker
                     url += "&info_hash=" + parameters.InfoHash.UrlEncode ();
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                request.UserAgent = MonoTorrent.Common.VersionInfo.ClientVersion;
+                request.UserAgent = VersionInfo.ClientVersion;
                 BeginRequest(request, ScrapeReceived, new object[] { request, state });
             }
             catch

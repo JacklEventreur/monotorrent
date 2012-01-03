@@ -1,9 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using MonoTorrent.Client;
 using MonoTorrent.Common;
-using System.Threading;
 
 namespace MonoTorrent.Client.PieceWriters
 {
@@ -30,7 +27,7 @@ namespace MonoTorrent.Client.PieceWriters
 
         public int Used
         {
-            get { return this.cachedBlocks.Count * Piece.BlockSize; }
+            get { return cachedBlocks.Count * Piece.BlockSize; }
         }
 
         public MemoryWriter(PieceWriter writer)
@@ -106,7 +103,7 @@ namespace MonoTorrent.Client.PieceWriters
 
         public override bool Exists(TorrentFile file)
         {
-            return this.writer.Exists(file);
+            return writer.Exists(file);
         }
 
         public override void Flush(TorrentFile file)

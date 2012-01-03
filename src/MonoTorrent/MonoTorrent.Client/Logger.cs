@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.IO;
 using System.Diagnostics;
 using MonoTorrent.Client.Connections;
 
@@ -24,31 +23,12 @@ namespace MonoTorrent.Client
             lock (listeners)
                 listeners.Add(listener);
         }
-		
-		public static void Flush()
-		{
-			lock (listeners)
-				listeners.ForEach (delegate (TraceListener l) { l.Flush(); } );
-		}
-        /*
-        internal static void Log(PeerIdInternal id, string message)
-        {
-            Log(id.PublicId, message);
-        }
-
-        internal static void Log(PeerId id, string message)
+        
+        public static void Flush()
         {
             lock (listeners)
-                for (int i = 0; i < listeners.Count; i++)
-                    listeners[i].WriteLine(id.GetHashCode().ToString() + ": " + message);
+                listeners.ForEach (delegate (TraceListener l) { l.Flush(); } );
         }
-
-        internal static void Log(string p)
-        {
-            lock (listeners)
-                for (int i = 0; i < listeners.Count; i++)
-                    listeners[i].WriteLine(p);
-        }*/
 
         [Conditional("DO_NOT_ENABLE")]
         internal static void Log(IConnection connection, string message)
@@ -73,7 +53,7 @@ namespace MonoTorrent.Client
                     sb.Append(string.Format(message, formatting));
                 else
                     sb.Append(message);
-				string s = sb.ToString();
+                string s = sb.ToString();
                 listeners.ForEach(delegate(TraceListener l) { l.WriteLine(s); });
             }
         }

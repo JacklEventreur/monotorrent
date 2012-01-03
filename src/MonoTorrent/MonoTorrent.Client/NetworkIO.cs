@@ -29,8 +29,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-
-using MonoTorrent.Client;
 using MonoTorrent.Client.Connections;
 using MonoTorrent.Client.Messages;
 using MonoTorrent.Common;

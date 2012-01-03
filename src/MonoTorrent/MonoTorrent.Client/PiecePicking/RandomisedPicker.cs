@@ -29,7 +29,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Client.Messages;
 using MonoTorrent.Common;
 
@@ -39,8 +38,7 @@ namespace MonoTorrent.Client
     {
         Random random = new Random();
 
-        public RandomisedPicker(PiecePicker picker)
-            :base(picker)
+        public RandomisedPicker(PiecePicker picker) : base(picker)
         {
 
         }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using MonoTorrent.Common;
 using System.IO;
 
@@ -12,16 +11,16 @@ namespace MonoTorrent.Client
         // The most recently used is at the last position in the array
         private List<TorrentFileStream> list;
         private int maxStreams;
-		
-		public int Count
-		{
-			get { return list.Count; }
-		}
-		
-		public List<TorrentFileStream> Streams
-		{
-			get { return list; }
-		}
+        
+        public int Count
+        {
+            get { return list.Count; }
+        }
+        
+        public List<TorrentFileStream> Streams
+        {
+            get { return list; }
+        }
 
         public FileStreamBuffer(int maxStreams)
         {
